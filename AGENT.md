@@ -50,6 +50,16 @@ You are **FORBIDDEN** from jumping straight into coding. For every user request,
   * **`Golang`**: `go vet ./...`, `golangci-lint run` (if available), & `go test -v -race ./...`.
   * **`Next.js`**: `npm run lint`, `npx tsc --noEmit`, & `npm run test` / `npm run build`.
 
+### Plan Management Protocol (`/plan`)
+1. **No Chat-Only Plans:** Never output an implementation plan solely in the chat window. Every `/plan` command MUST generate or update a physical Markdown file at `docs/plans/active/YYYY-MM-DD-<feature-slug>.md`.
+2. **Mandatory Plan Structure:** Each plan file must contain:
+   - **Metadata:** Status (`DRAFT` | `APPROVED` | `IN_PROGRESS` | `COMPLETED`), Related Issue ID, Target Layers affected.
+   - **Architecture Impact:** Exact list of Interfaces, Implementations, DTOs, and DB Migrations to be created/modified across `.NET`, `Golang`, and `Next.js`.
+   - **Error Codes Impact:** New `SCREAMING_SNAKE_CASE` error codes to be added to `docs/error_codes.md`.
+   - **Execution Checklist (`tasks.md` style):** Granular, verifiable steps using `- [ ]` checkboxes.
+   - **Test Verification Matrix:** Exact unit and integration test cases required before completion.
+3. **Execution Gate:** Do NOT write any application code while the plan status is `DRAFT`. Wait for explicit user approval (`APPROVED`), update the status to `IN_PROGRESS`, and check off (`- [x]`) each task in the plan file as it is completed.
+4. **Completion & Archiving:** Once all tasks and tests pass, update status to `COMPLETED` and move the plan file to `docs/plans/archived/`.
 ---
 
 ## 3. STANDARDIZED ERROR HANDLING & MULTILINGUAL I18N (`vi` & `en`)
