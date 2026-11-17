@@ -1,1 +1,6 @@
-.agents/*
+.agents/**
+**/.vs/
+**/obj/
+**/bin/
+**/appsettings.json
+**/appsettings.Development.json
