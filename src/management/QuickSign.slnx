@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="QuickSign.Application.Contracts/QuickSign.Application.Contracts.csproj" Id="09ca19e8-ab23-4707-a0f1-aa783525414a" />
+  <Project Path="QuickSign.Application/QuickSign.Application.csproj" Id="6b353cf7-0391-44f1-aa4c-05bcf0f694ca" />
+  <Project Path="QuickSign.DbMigrator/QuickSign.DbMigrator.csproj" Id="3dc0244a-8461-4a4c-8a53-3904c2d73a3e" />
+  <Project Path="QuickSign.Domain.Shared/QuickSign.Domain.Shared.csproj" Id="bcb78f4a-5750-486a-86d5-640eabf91926" />
+  <Project Path="QuickSign.Domain/QuickSign.Domain.csproj" Id="829c6ca5-1386-4a1d-b800-66df52c4be6c" />
+  <Project Path="QuickSign.EntityFrameworkCore/QuickSign.EntityFrameworkCore.csproj" Id="1b200008-f937-48a3-98b8-2c931da69ca9" />
+  <Project Path="QuickSign.HttpApi/QuickSign.HttpApi.csproj" Id="fb4c85a2-7b35-4eeb-a8db-e2a5289d8586" />
+  <Project Path="QuickSign.Infrastructure/QuickSign.Infrastructure.csproj" Id="c643b658-be63-4708-b9e2-00b720f38140" />
+  <Project Path="QuickSign.HttpApi.Host/QuickSign.HttpApi.Host.csproj" />
+</Solution>
