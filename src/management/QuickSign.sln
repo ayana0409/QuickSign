@@ -2,23 +2,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Domain.Shared", "QuickSign.Domain.Shared\QuickSign.Domain.Shared.csproj", "{BCB78F4A-5750-486A-86D5-640EABF91926}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1111111-1111-1111-1111-111111111111}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Domain", "QuickSign.Domain\QuickSign.Domain.csproj", "{829C6CA5-1386-4A1D-B800-66DF52C4BE6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B2222222-2222-2222-2222-222222222222}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Application.Contracts", "QuickSign.Application.Contracts\QuickSign.Application.Contracts.csproj", "{09CA19E8-AB23-4707-A0F1-AA783525414A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Domain.Shared", "src\QuickSign.Domain.Shared\QuickSign.Domain.Shared.csproj", "{BCB78F4A-5750-486A-86D5-640EABF91926}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Application", "QuickSign.Application\QuickSign.Application.csproj", "{6B353CF7-0391-44F1-AA4C-05BCF0F694CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Domain", "src\QuickSign.Domain\QuickSign.Domain.csproj", "{829C6CA5-1386-4A1D-B800-66DF52C4BE6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.EntityFrameworkCore", "QuickSign.EntityFrameworkCore\QuickSign.EntityFrameworkCore.csproj", "{1B200008-F937-48A3-98B8-2C931DA69CA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Application.Contracts", "src\QuickSign.Application.Contracts\QuickSign.Application.Contracts.csproj", "{09CA19E8-AB23-4707-A0F1-AA783525414A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Infrastructure", "QuickSign.Infrastructure\QuickSign.Infrastructure.csproj", "{C643B658-BE63-4708-B9E2-00B720F38140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Application", "src\QuickSign.Application\QuickSign.Application.csproj", "{6B353CF7-0391-44F1-AA4C-05BCF0F694CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.HttpApi", "QuickSign.HttpApi\QuickSign.HttpApi.csproj", "{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.EntityFrameworkCore", "src\QuickSign.EntityFrameworkCore\QuickSign.EntityFrameworkCore.csproj", "{1B200008-F937-48A3-98B8-2C931DA69CA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.DbMigrator", "QuickSign.DbMigrator\QuickSign.DbMigrator.csproj", "{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.DbMigrator", "src\QuickSign.DbMigrator\QuickSign.DbMigrator.csproj", "{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.HttpApi.Host", "QuickSign.HttpApi.Host\QuickSign.HttpApi.Host.csproj", "{A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Infrastructure", "src\QuickSign.Infrastructure\QuickSign.Infrastructure.csproj", "{C643B658-BE63-4708-B9E2-00B720F38140}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.HttpApi", "src\QuickSign.HttpApi\QuickSign.HttpApi.csproj", "{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.HttpApi.Host", "src\QuickSign.HttpApi.Host\QuickSign.HttpApi.Host.csproj", "{DE99B123-5C72-4B6E-A795-B7D41666497C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Domain.Tests", "test\QuickSign.Domain.Tests\QuickSign.Domain.Tests.csproj", "{E1111111-1111-1111-1111-111111111111}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickSign.Application.Tests", "test\QuickSign.Application.Tests\QuickSign.Application.Tests.csproj", "{F2222222-2222-2222-2222-222222222222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +54,10 @@ Global
 		{1B200008-F937-48A3-98B8-2C931DA69CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B200008-F937-48A3-98B8-2C931DA69CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B200008-F937-48A3-98B8-2C931DA69CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C643B658-BE63-4708-B9E2-00B720F38140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C643B658-BE63-4708-B9E2-00B720F38140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C643B658-BE63-4708-B9E2-00B720F38140}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,16 +66,30 @@ Global
 		{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE99B123-5C72-4B6E-A795-B7D41666497C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE99B123-5C72-4B6E-A795-B7D41666497C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE99B123-5C72-4B6E-A795-B7D41666497C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE99B123-5C72-4B6E-A795-B7D41666497C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1111111-1111-1111-1111-111111111111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1111111-1111-1111-1111-111111111111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1111111-1111-1111-1111-111111111111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1111111-1111-1111-1111-111111111111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2222222-2222-2222-2222-222222222222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2222222-2222-2222-2222-222222222222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2222222-2222-2222-2222-222222222222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2222222-2222-2222-2222-222222222222}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+	GlobalSection(NestedProjects) = preSolution
+		{BCB78F4A-5750-486A-86D5-640EABF91926} = {A1111111-1111-1111-1111-111111111111}
+		{829C6CA5-1386-4A1D-B800-66DF52C4BE6C} = {A1111111-1111-1111-1111-111111111111}
+		{09CA19E8-AB23-4707-A0F1-AA783525414A} = {A1111111-1111-1111-1111-111111111111}
+		{6B353CF7-0391-44F1-AA4C-05BCF0F694CA} = {A1111111-1111-1111-1111-111111111111}
+		{1B200008-F937-48A3-98B8-2C931DA69CA9} = {A1111111-1111-1111-1111-111111111111}
+		{3DC0244A-8461-4A4C-8A53-3904C2D73A3E} = {A1111111-1111-1111-1111-111111111111}
+		{C643B658-BE63-4708-B9E2-00B720F38140} = {A1111111-1111-1111-1111-111111111111}
+		{FB4C85A2-7B35-4EEB-A8DB-E2A5289D8586} = {A1111111-1111-1111-1111-111111111111}
+		{DE99B123-5C72-4B6E-A795-B7D41666497C} = {A1111111-1111-1111-1111-111111111111}
+		{E1111111-1111-1111-1111-111111111111} = {B2222222-2222-2222-2222-222222222222}
+		{F2222222-2222-2222-2222-222222222222} = {B2222222-2222-2222-2222-222222222222}
 	EndGlobalSection
 EndGlobal

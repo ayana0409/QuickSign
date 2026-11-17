@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Cryptography\Protos\crypto_engine.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QuickSign.Application.Contracts\QuickSign.Application.Contracts.csproj" />
     <ProjectReference Include="..\QuickSign.Domain\QuickSign.Domain.csproj" />
   </ItemGroup>

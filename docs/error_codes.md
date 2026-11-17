@@ -44,6 +44,7 @@ This document is the **Single Source of Truth (SSOT)** for all application and d
 | `CODE_EXISTS_UNVERIFIED_CONTENT` | `200` | `Go` | QR Code lookup confirmed code exists; file verification required | Mã tài liệu hợp lệ trên hệ thống. Cần tải file lên để đối soát nguyên vẹn. | Document code exists on system. Upload file to verify content integrity. |
 | `DOCUMENT_NOT_FOUND` | `404` | `.NET` / `Go` | Document ID or Document Code not found | Không tìm thấy tài liệu yêu cầu. | The requested document was not found. |
 | `DOCUMENT_CODE_EXISTS` | `409` | `Go` | Generated document code collided (rare) | Mã tài liệu đã tồn tại trong hệ thống. | Document code already exists. |
+| `INVALID_PAYLOAD` | `400` | `.NET` / `Go` | Request body or query parameters failed schema or model validation rules | Dữ liệu gửi lên không hợp lệ. Vui lòng kiểm tra lại. | The submitted data is invalid. Please verify your input. |
 | **SYSTEM & INFRASTRUCTURE** | | | | | |
 | `RATE_LIMIT_EXCEEDED` | `429` | `.NET` / `Go` | Request rate limit exceeded | Bạn đang gửi yêu cầu quá nhanh. Vui lòng chờ giây lát. | Too many requests. Please wait a moment and try again. |
 | `INTERNAL_SERVER_ERROR` | `500` | `.NET` / `Go` | Unexpected unhandled server exception | Hệ thống gặp lỗi nội bộ. Vui lòng thử lại sau. | An internal server error occurred. Please try again later. |
