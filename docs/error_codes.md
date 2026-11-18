@@ -16,10 +16,10 @@ This document is the **Single Source of Truth (SSOT)** for all application and d
 | **AUTHENTICATION & AUTHORIZATION** | | | | | |
 | `UNAUTHORIZED` | `401` | `.NET` / `Go` | Missing, malformed, or invalid JWT or API Key | Vui lòng đăng nhập để tiếp tục. | Please sign in to continue. |
 | `FORBIDDEN_ACCESS` | `403` | `.NET` / `Go` | User lacks required role or permission for this resource | Bạn không có quyền truy cập vào tài nguyên này. | You do not have permission to access this resource. |
-| `INVALID_CREDENTIALS` | `401` | `.NET` | Username or password incorrect during QuickBite login | Tài khoản hoặc mật khẩu không chính xác. | Invalid username or password. |
+| `INVALID_CREDENTIALS` | `401` | `.NET` | Username or password incorrect during SSO login | Tài khoản hoặc mật khẩu không chính xác. | Invalid username or password. |
 | `SESSION_EXPIRED` | `401` | `.NET` / `Go` | JWT token has expired | Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại. | Your session has expired. Please sign in again. |
-| `REFRESH_TOKEN_EXPIRED` | `401` | `.NET` | QuickBite refresh token has expired or is invalid | Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại. | Refresh token has expired. Please sign in again. |
-| `REGISTRATION_FAILED` | `400` | `.NET` | Account registration failed at QuickBite Identity | Đăng ký tài khoản thất bại. Vui lòng kiểm tra lại thông tin. | Account registration failed. Please verify your details. |
+| `REFRESH_TOKEN_EXPIRED` | `401` | `.NET` | SSO refresh token has expired or is invalid | Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại. | Refresh token has expired. Please sign in again. |
+| `REGISTRATION_FAILED` | `400` | `.NET` | Account registration failed at SSO Identity Provider | Đăng ký tài khoản thất bại. Vui lòng kiểm tra lại thông tin. | Account registration failed. Please verify your details. |
 | `API_KEY_INVALID` | `401` | `.NET` / `Go` | API Key provided in `X-API-Key` is invalid or not found | Khóa API Key không hợp lệ. | The provided API Key is invalid. |
 | `API_KEY_REVOKED` | `401` | `.NET` / `Go` | API Key has been revoked or deactivated | Khóa API Key này đã bị vô hiệu hóa. | This API Key has been deactivated. |
 | `API_KEY_EXPIRED` | `401` | `.NET` / `Go` | API Key has passed its expiration timestamp | Khóa API Key này đã hết hạn sử dụng. | This API Key has expired. |

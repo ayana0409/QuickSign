@@ -6,7 +6,7 @@
 ## 1. Metadata
 * **Mã Kế Hoạch:** `PLAN-2026-11-17-PHASE1`
 * **File Lưu Trữ:** `docs/plans/active/2026-11-17-phase1-dotnet-management-core.md`
-* **Trạng Thái Hiện Tại:** `DRAFT` *(Đang chờ Người Dùng phê duyệt)*
+* **Trạng Thái Hiện Tại:** `COMPLETED` *(Toàn bộ 9 projects & 2 test projects hoàn thành, 23/23 unit tests đạt PASS 100%)*
 * **Target Framework:** `.NET 10.0` (`net10.0`)
 * **Thư Mục Mã Nguồn .NET:** `src/management/`
 * **File Solution Chính:** `src/management/QuickSign.sln` & `src/management/QuickSign.slnx`
@@ -192,84 +192,85 @@ src/management/
 ## 4. Danh Sách Công Việc Chi Tiết Cần Thực Thi (Execution Checklist)
 
 ### Bước 1: Cấu Hình Kết Nối Hạ Tầng Sẵn Có
-- [ ] Cấu hình Connection Strings cho PostgreSQL và Redis trong `QuickSign.HttpApi.Host/appsettings.Development.json` và `QuickSign.DbMigrator/appsettings.json`.
-- [ ] Cấu hình Endpoint và Token của Vault trong cấu hình môi trường phát triển.
-- [ ] *(Đã bỏ qua hoàn toàn bước tạo `docker-compose.yml` theo yêu cầu)*.
+- [x] Cấu hình Connection Strings cho PostgreSQL và Redis trong `QuickSign.HttpApi.Host/appsettings.Development.json` và `QuickSign.DbMigrator/appsettings.json`.
+- [x] Cấu hình Endpoint và Token của Vault trong cấu hình môi trường phát triển.
+- [x] *(Đã bỏ qua hoàn toàn bước tạo `docker-compose.yml` theo yêu cầu)*.
 
 ### Bước 2: Tầng Domain.Shared & Domain
-- [ ] Triển khai `QuickSign.Domain.Shared`:
-  - [ ] Enums: `CertificateStatusType`, `KeyAlgorithmType`, `DocumentType`, `VerificationMethodType`, `ValidationStatusType`.
-  - [ ] Hằng số: `CertificateConsts`, `ApiKeyConsts`.
-  - [ ] Hằng số mã lỗi: `QuickSignDomainErrorCodes.cs` (toàn bộ mã lỗi `SCREAMING_SNAKE_CASE` theo SSOT `docs/error_codes.md`).
-- [ ] Triển khai `QuickSign.Domain`:
-  - [ ] SeedWork: `Entity<T>`, `AggregateRoot<T>`, `ValueObject`.
-  - [ ] Aggregates & Value Objects: `Certificate`, `RevocationInfo`, `ApiKey`, `ApiKeySecretHash`, `SignedDocument`, `VerificationLog`, `DocumentCode`, `Sha256Hash`.
-  - [ ] Domain Service: `ICertificateManager` & `CertificateManager` (ràng buộc tối đa 5 certs active).
-  - [ ] Repositories & UoW: `IUnitOfWork`, `ICertificateRepository`, `IApiKeyRepository`, `ISignedDocumentRepository`.
-  - [ ] Data Seeder / Migrator Interfaces: `IQuickSignDbSchemaMigrator`, `IDataSeedContributor`, `QuickSignDbMigrationService`.
-  - [ ] `BusinessException.cs` và `DependencyInjection.cs`.
+- [x] Triển khai `QuickSign.Domain.Shared`:
+  - [x] Enums: `CertificateStatusType`, `KeyAlgorithmType`, `DocumentType`, `VerificationMethodType`, `ValidationStatusType`.
+  - [x] Hằng số: `CertificateConsts`, `ApiKeyConsts`.
+  - [x] Hằng số mã lỗi: `QuickSignDomainErrorCodes.cs` (toàn bộ mã lỗi `SCREAMING_SNAKE_CASE` theo SSOT `docs/error_codes.md`).
+- [x] Triển khai `QuickSign.Domain`:
+  - [x] SeedWork: `Entity<T>`, `AggregateRoot<T>`, `ValueObject`.
+  - [x] Aggregates & Value Objects: `Certificate`, `RevocationInfo`, `ApiKey`, `ApiKeySecretHash`, `SignedDocument`, `VerificationLog`, `DocumentCode`, `Sha256Hash`.
+  - [x] Domain Service: `ICertificateManager` & `CertificateManager` (ràng buộc tối đa 5 certs active).
+  - [x] Repositories & UoW: `IUnitOfWork`, `ICertificateRepository`, `IApiKeyRepository`, `ISignedDocumentRepository`.
+  - [x] Data Seeder / Migrator Interfaces: `IQuickSignDbSchemaMigrator`, `IDataSeedContributor`, `QuickSignDbMigrationService`.
+  - [x] `BusinessException.cs` và `DependencyInjection.cs`.
 
 ### Bước 3: Tầng EntityFrameworkCore & DbMigrator
-- [ ] Xây dựng `QuickSignDbContext` kế thừa `DbContext` với 4 `DbSet`.
-- [ ] Xây dựng 4 Fluent API configurations trong thư mục `Configurations/`:
-  - [ ] `CertificateConfiguration`: Table `certificates`, index `user_id`, unique `serial_number`.
-  - [ ] `ApiKeyConfiguration`: Table `api_keys`, index `user_id`, unique `key_hash`.
-  - [ ] `SignedDocumentConfiguration`: Table `signed_documents`, unique `document_code`, index `user_id`, `original_hash`, `signed_hash`.
-  - [ ] `VerificationLogConfiguration`: Table `verification_logs`, index `signed_document_id`, index `verified_at`.
-- [ ] Triển khai `EfCoreCertificateRepository`, `EfCoreApiKeyRepository`, `EfCoreSignedDocumentRepository`, `EfCoreUnitOfWork`.
-- [ ] Triển khai `EfCoreQuickSignDbSchemaMigrator` và `QuickSignDbContextFactory`.
-- [ ] Tạo EF Core Migration `InitialCreate`.
-- [ ] Chạy `QuickSign.DbMigrator` để khởi tạo cấu trúc bảng trên PostgreSQL server có sẵn.
+- [x] Xây dựng `QuickSignDbContext` kế thừa `DbContext` với 4 `DbSet`.
+- [x] Xây dựng 4 Fluent API configurations trong thư mục `Configurations/`:
+  - [x] `CertificateConfiguration`: Table `certificates`, index `user_id`, unique `serial_number`.
+  - [x] `ApiKeyConfiguration`: Table `api_keys`, index `user_id`, unique `key_hash`.
+  - [x] `SignedDocumentConfiguration`: Table `signed_documents`, unique `document_code`, index `user_id`, `original_hash`, `signed_hash`.
+  - [x] `VerificationLogConfiguration`: Table `verification_logs`, index `signed_document_id`, index `verified_at`.
+- [x] Triển khai `EfCoreCertificateRepository`, `EfCoreApiKeyRepository`, `EfCoreSignedDocumentRepository`, `EfCoreUnitOfWork`.
+- [x] Triển khai `EfCoreQuickSignDbSchemaMigrator` và `QuickSignDbContextFactory`.
+- [x] Tạo EF Core Migration `InitialCreate`.
+- [x] Chạy `QuickSign.DbMigrator` để khởi tạo cấu trúc bảng trên PostgreSQL server có sẵn.
 
 ### Bước 4: Tầng Application.Contracts & Infrastructure
-- [ ] `Application.Contracts`: Khai báo đầy đủ DTOs (Auth, Certificates, ApiKeys, Documents, Stats) và Interfaces (`IAuthAppService`, `ICertificateAppService`, `IApiKeyAppService`, `IDocumentAppService`, `IStatisticsAppService`, `IAdminAppService`).
-- [ ] `Infrastructure.Identity`:
-  - [ ] `QuickBiteIdentityService`: Triển khai BFF HTTP Client gọi QuickBite Identity (Login password grant, Register, Refresh Token).
-  - [ ] `CurrentUserService`: Lấy thông tin user hiện tại (`UserId`, `Roles`) từ `IHttpContextAccessor`.
-- [ ] `Infrastructure.Cryptography`:
-  - [ ] Tạo file proto `crypto_engine.proto` gồm 2 RPC: `GenerateCertificateKeyPair` và `DeleteCertificateKeyPair` (Compensating Transaction theo ADR 0001).
-  - [ ] Triển khai `CryptoEngineGrpcService` gọi sang Go Engine với Polly Retry Policy.
-- [ ] `Infrastructure.Caching`: Triển khai `RedisCacheService` kết nối `IConnectionMultiplexer`.
-- [ ] `Infrastructure.Security`: Triển khai `ApiKeyCryptoService` (sinh key ngẫu nhiên `qs_live_...`, tách prefix 8 ký tự, băm SHA-256).
+- [x] `Application.Contracts`: Khai báo đầy đủ DTOs (Auth, Certificates, ApiKeys, Documents, Stats) và Interfaces (`IAuthAppService`, `ICertificateAppService`, `IApiKeyAppService`, `IDocumentAppService`, `IStatisticsAppService`, `IAdminAppService`).
+- [x] `Infrastructure.Identity`:
+  - [x] `QuickBiteIdentityService`: Triển khai BFF HTTP Client gọi QuickBite Identity (Login password grant, Register, Refresh Token).
+  - [x] `CurrentUserService`: Lấy thông tin user hiện tại (`UserId`, `Roles`) từ `IHttpContextAccessor`.
+- [x] `Infrastructure.Cryptography`:
+  - [x] Tạo file proto `crypto_engine.proto` gồm 2 RPC: `GenerateCertificateKeyPair` và `DeleteCertificateKeyPair` (Compensating Transaction theo ADR 0001).
+  - [x] Triển khai `CryptoEngineGrpcService` gọi sang Go Engine với Polly Retry Policy.
+- [x] `Infrastructure.Caching`: Triển khai `RedisCacheService` kết nối `IConnectionMultiplexer`.
+- [x] `Infrastructure.Security`: Triển khai `ApiKeyCryptoService` (sinh key ngẫu nhiên `qs_live_...`, tách prefix 8 ký tự, băm SHA-256).
 
 ### Bước 5: Tầng Application
-- [ ] Triển khai `QuickSignApplicationAutoMapperProfile`.
-- [ ] Triển khai FluentValidation validators cho các Request DTOs.
-- [ ] Triển khai `AuthAppService`: Điều hướng gọi `IQuickBiteIdentityService`.
-- [ ] Triển khai `CertificateAppService`:
-  - [ ] `IssueCertificateAsync`: Gọi gRPC sang Go $\rightarrow$ Tạo aggregate qua `ICertificateManager` $\rightarrow$ Lưu DB. **Nếu lưu DB ném exception $\rightarrow$ gọi compensating transaction `DeleteCertificateKeyPair` sang Go**.
-  - [ ] `RevokeCertificateAsync`: Kiểm tra quyền sở hữu, cập nhật trạng thái thu hồi, xóa cache Redis.
-  - [ ] `GetMyCertificatesAsync`: Sử dụng `.AsNoTracking()` và AutoMapper.
-- [ ] Triển khai `ApiKeyAppService`:
-  - [ ] Tạo key mới, băm SHA-256, lưu DB, đồng bộ Redis cache `qs_key:{hash}`.
-  - [ ] Xóa/thu hồi key và xóa cache Redis.
-- [ ] Triển khai `DocumentAppService` và `StatisticsAppService`: Sử dụng AutoMapper `.ProjectTo<TDto>()` để tối ưu câu lệnh SQL `SELECT`.
+- [x] Triển khai `QuickSignApplicationAutoMapperProfile`.
+- [x] Triển khai FluentValidation validators cho các Request DTOs.
+- [x] Triển khai `AuthAppService`: Điều hướng gọi `IQuickBiteIdentityService`.
+- [x] Triển khai `CertificateAppService`:
+  - [x] `IssueCertificateAsync`: Gọi gRPC sang Go $\rightarrow$ Tạo aggregate qua `ICertificateManager` $\rightarrow$ Lưu DB. **Nếu lưu DB ném exception $\rightarrow$ gọi compensating transaction `DeleteCertificateKeyPair` sang Go**.
+  - [x] `RevokeCertificateAsync`: Kiểm tra quyền sở hữu, cập nhật trạng thái thu hồi, xóa cache Redis.
+  - [x] `GetMyCertificatesAsync`: Sử dụng `.AsNoTracking()` và AutoMapper.
+- [x] Triển khai `ApiKeyAppService`:
+  - [x] Tạo key mới, băm SHA-256, lưu DB, đồng bộ Redis cache `qs_key:{hash}`.
+  - [x] Xóa/thu hồi key và xóa cache Redis.
+- [x] Triển khai `DocumentAppService` và `StatisticsAppService`: Sử dụng AutoMapper `.ProjectTo<TDto>()` để tối ưu câu lệnh SQL `SELECT`.
 
 ### Bước 6: Tầng HttpApi & HttpApi.Host
-- [ ] `HttpApi`: Xây dựng Controllers kế thừa `QuickSignControllerBase`:
-  - [ ] `AuthController` (`/api/v1/auth`)
-  - [ ] `CertificatesController` (`/api/v1/certificates`)
-  - [ ] `ApiKeysController` (`/api/v1/api-keys`)
-  - [ ] `DocumentsController` (`/api/v1/documents`)
-  - [ ] `StatisticsController` (`/api/v1/stats`)
-  - [ ] `AdminController` (`/api/v1/admin`)
-- [ ] `HttpApi.Host`:
-  - [ ] `BusinessExceptionHandlingMiddleware`: Bắt `BusinessException` và trả payload JSON chuẩn:
+- [x] `HttpApi`: Xây dựng Controllers kế thừa `QuickSignControllerBase`:
+  - [x] `AuthController` (`/api/v1/auth`)
+  - [x] `CertificatesController` (`/api/v1/certificates`)
+  - [x] `ApiKeysController` (`/api/v1/api-keys`)
+  - [x] `DocumentsController` (`/api/v1/documents`)
+  - [x] `StatisticsController` (`/api/v1/stats`)
+  - [x] `AdminController` (`/api/v1/admin`)
+- [x] `HttpApi.Host`:
+  - [x] `BusinessExceptionHandlingMiddleware`: Bắt `BusinessException` và trả payload JSON chuẩn:
     `{"errorCode": "...", "httpStatus": ..., "timestamp": "...", "traceId": "..."}`.
-  - [ ] Cấu hình JWT Bearer Authentication trỏ về JWKS của QuickBite Identity.
-  - [ ] Cấu hình CORS cho cổng `localhost:3000` (Next.js).
-  - [ ] Cấu hình Swagger / OpenAPI hỗ trợ Bearer Token.
-  - [ ] Kết nối toàn bộ DI Container trong `Program.cs`.
+  - [x] Cấu hình JWT Bearer Authentication trỏ về JWKS của QuickBite Identity.
+  - [x] Cấu hình CORS cho cổng `localhost:3000` (Next.js).
+  - [x] Cấu hình Swagger / OpenAPI hỗ trợ Bearer Token.
+  - [x] Kết nối toàn bộ DI Container trong `Program.cs`.
 
 ### Bước 7: Kiểm Thử Tự Động & Pre-Handover Verification
-- [ ] Tạo project `test/QuickSign.Domain.Tests` và `test/QuickSign.Application.Tests`.
-- [ ] Viết Unit Test cho Domain Service `CertificateManager` (quy tắc 5 certs active, ngày thu hồi hợp lệ, chặn thu hồi lặp lại).
-- [ ] Viết Unit Test cho `ApiKeyCryptoService` (prefix 8 ký tự, SHA-256 hash).
-- [ ] Viết Unit Test cho `CertificateAppService` (Compensating Transaction kích hoạt khi DB lỗi).
-- [ ] Chạy kiểm tra biên dịch Release và thực thi test suite:
+- [x] Tạo project `test/QuickSign.Domain.Tests` và `test/QuickSign.Application.Tests`.
+- [x] Viết Unit Test cho Domain Service `CertificateManager` (quy tắc 5 certs active, ngày thu hồi hợp lệ, chặn thu hồi lặp lại).
+- [x] Viết Unit Test cho `ApiKeyCryptoService` (prefix 8 ký tự, SHA-256 hash).
+- [x] Viết Unit Test cho `CertificateAppService` (Compensating Transaction kích hoạt khi DB lỗi).
+- [x] Chạy kiểm tra biên dịch Release và thực thi test suite:
   ```bash
   dotnet test src/management/QuickSign.sln
   ```
+  *(Kết quả: 23/23 tests Passed, 0 Failed, 0 Skipped).*
 
 ---
 
@@ -277,11 +278,11 @@ src/management/
 
 | Test ID | Module | Tình Huống Kiểm Thử | Điều Kiện Đầu Vào | Kết Quả Mong Đợi | Trạng Thái |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| `TC-DOM-01` | Domain Service | Giới hạn 5 chứng thư active | User đã có 5 certs `Active`, gọi `CreateAsync` | Ném `BusinessException` mã `MAX_ACTIVE_CERTS_REACHED` | Chưa chạy |
-| `TC-DOM-02` | Domain Entity | Thu hồi chứng thư hợp lệ | Cert đang active, ngày vô hiệu hóa $\ge$ `CreatedAt` | Trạng thái = `Revoked`, gán đúng `RevocationInfo` | Chưa chạy |
-| `TC-DOM-03` | Domain Entity | Thu hồi với ngày không hợp lệ | `InvalidatedFrom < CreatedAt` | Ném `BusinessException` mã `INVALID_REVOCATION_TIMESTAMP` | Chưa chạy |
-| `TC-DOM-04` | Domain Entity | Thu hồi chứng thư đã thu hồi | Cert có trạng thái `Revoked` | Ném `BusinessException` mã `CERT_ALREADY_REVOKED` | Chưa chạy |
-| `TC-APP-01` | Application Service | Giao dịch bù trừ (Compensating Tx) | Go trả key thành công nhưng DB Save ném ngoại lệ | Bắt lỗi, kích hoạt gọi gRPC `DeleteCertificateKeyPair` sang Go | Chưa chạy |
-| `TC-APP-02` | Application Service | Thu hồi chứng thư của người khác | User A thu hồi cert của User B (không có role Admin) | Ném `BusinessException` mã `UNAUTHORIZED_CERTIFICATE_ACCESS` | Chưa chạy |
-| `TC-INF-01` | Infrastructure | Sinh và băm API Key | Gọi `GenerateApiKey()` | Key có prefix `qs_live_`, hash SHA-256 đúng 64 ký tự hex | Chưa chạy |
-| `TC-MID-01` | Middleware | Chuẩn hóa lỗi JSON | Controller ném `BusinessException` | Response mã HTTP tương ứng và body có `errorCode` đúng chuẩn | Chưa chạy |
+| `TC-DOM-01` | Domain Service | Giới hạn 5 chứng thư active | User đã có 5 certs `Active`, gọi `CreateAsync` | Ném `BusinessException` mã `MAX_ACTIVE_CERTS_REACHED` | **PASS (100%)** |
+| `TC-DOM-02` | Domain Entity | Thu hồi chứng thư hợp lệ | Cert đang active, ngày vô hiệu hóa $\ge$ `CreatedAt` | Trạng thái = `Revoked`, gán đúng `RevocationInfo` | **PASS (100%)** |
+| `TC-DOM-03` | Domain Entity | Thu hồi với ngày không hợp lệ | `InvalidatedFrom < CreatedAt` | Ném `BusinessException` mã `INVALID_REVOCATION_TIMESTAMP` | **PASS (100%)** |
+| `TC-DOM-04` | Domain Entity | Thu hồi chứng thư đã thu hồi | Cert có trạng thái `Revoked` | Ném `BusinessException` mã `CERT_ALREADY_REVOKED` | **PASS (100%)** |
+| `TC-APP-01` | Application Service | Giao dịch bù trừ (Compensating Tx) | Go trả key thành công nhưng DB Save ném ngoại lệ | Bắt lỗi, kích hoạt gọi gRPC `DeleteCertificateKeyPair` sang Go | **PASS (100%)** |
+| `TC-APP-02` | Application Service | Thu hồi chứng thư của người khác | User A thu hồi cert của User B (không có role Admin) | Ném `BusinessException` mã `UNAUTHORIZED_CERTIFICATE_ACCESS` | **PASS (100%)** |
+| `TC-INF-01` | Infrastructure | Sinh và băm API Key | Gọi `GenerateApiKey()` | Key có prefix `qs_live_`, hash SHA-256 đúng 64 ký tự hex | **PASS (100%)** |
+| `TC-MID-01` | Middleware | Chuẩn hóa lỗi JSON | Controller ném `BusinessException` | Response mã HTTP tương ứng và body có `errorCode` đúng chuẩn | **PASS (100%)** |
