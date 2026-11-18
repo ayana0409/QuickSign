@@ -16,8 +16,11 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Default")
-            ?? throw new InvalidOperationException("Default connection string is missing from configuration.");
+        var connectionString = configuration.GetConnectionString("Default");
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException("Connection string 'ConnectionStrings:Default' is required and cannot be empty.");
+        }
 
         services.AddDbContext<QuickSignDbContext>(options =>
         {

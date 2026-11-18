@@ -6,4 +6,7 @@
 **/appsettings.Development.json
 NuGet/NuGet.Config
 nuget.config
+AppData/
+diag.txt
+build.binlog
 msbuild.log
