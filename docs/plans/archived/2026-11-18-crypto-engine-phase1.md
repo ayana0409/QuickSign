@@ -5,8 +5,8 @@
 
 ## 1. Metadata
 * **Mã Kế Hoạch:** `PLAN-2026-11-18-CRYPTO-ENGINE-PHASE1`
-* **File Kế Hoạch:** `docs/plans/active/2026-11-18-crypto-engine-phase1.md`
-* **Trạng Thái Hiện Tại:** `PENDING_APPROVAL` *(Chờ Người Dùng Phê Duyệt)*
+* **File Kế Hoạch:** `docs/plans/archived/2026-11-18-crypto-engine-phase1.md`
+* **Trạng Thái Hiện Tại:** `COMPLETED` *(Đã Hoàn Thành & Nghiệm Thu)*
 * **Phạm Vi Tác Động:**
   - `src/crypto-engine/` (toàn bộ - khởi tạo và triển khai từ đầu)
   - `src/management/test/QuickSign.Infrastructure.Tests/` (thêm project .NET integration test giao tiếp gRPC với Go)
@@ -310,33 +310,33 @@ VAULT_PATH_PREFIX=quicksign-test/users  # Dùng prefix test riêng để không 
 
 ## 8. Kế Hoạch Triển Khai (Execution Checklist)
 
-- [ ] **Bước 1: Khởi tạo Go module & dependencies**
+- [x] **Bước 1: Khởi tạo Go module & dependencies**
   - Khởi tạo `go.mod` tại `src/crypto-engine`.
   - Cài đặt gRPC, Protobuf, Vault API client, Testify.
   - Biên dịch proto sang Go (`crypto_engine.pb.go`, `crypto_engine_grpc.pb.go`).
-- [ ] **Bước 2: Implement Domain, Ports & Memory Guard**
+- [x] **Bước 2: Implement Domain, Ports & Memory Guard**
   - Tạo `keypair.go`, `inbound.go`, `outbound.go`.
   - Tạo `pkg/memguard/zero.go` (ADR 0001 §3).
-- [ ] **Bước 3: Implement Vault Adapter**
+- [x] **Bước 3: Implement Vault Adapter**
   - Tạo `hashicorp_vault.go` kết nối Vault KV v2.
-- [ ] **Bước 4: Implement KeyGenService**
+- [x] **Bước 4: Implement KeyGenService**
   - Sinh cặp khóa RSA-2048 / ECDSA-P256, sinh X.509 cert, lưu Vault, zeroing bộ nhớ.
-- [ ] **Bước 5: Implement gRPC Server & Entrypoint `main.go`**
+- [x] **Bước 5: Implement gRPC Server & Entrypoint `main.go`**
   - Tạo `crypto_grpc_server.go`, `config.go`, `cmd/server/main.go`.
-- [ ] **Bước 6: Viết Unit Tests trong Go**
+- [x] **Bước 6: Viết Unit Tests trong Go**
   - Kiểm thử `KeyGenService` với Mock Vault, kiểm tra 7 test cases.
   - Chạy `go test ./tests/unit/... -v`.
-- [ ] **Bước 7: Viết Integration Tests trong Go**
+- [x] **Bước 7: Viết Integration Tests trong Go**
   - Kiểm thử gRPC server và Vault adapter với Vault thật.
   - Chạy `go test ./tests/integration/... -v`.
-- [ ] **Bước 8: Viết Integration Tests trong .NET**
+- [x] **Bước 8: Viết Integration Tests trong .NET**
   - Tạo project `QuickSign.Infrastructure.Tests`.
   - Thêm integration tests kiểm thử `CryptoEngineGrpcService` gọi qua Go server.
-- [ ] **Bước 9: Chạy kiểm thử toàn diện & Nghiệm thu**
+- [x] **Bước 9: Chạy kiểm thử toàn diện & Nghiệm thu**
   - Biên dịch `go build ./cmd/server/`.
   - Biên dịch .NET: `dotnet build src/management/QuickSign.sln`.
   - Chạy toàn bộ test suites của cả Go và .NET.
-- [ ] **Bước 10: Lưu trữ kế hoạch và cập nhật Walkthrough**
+- [x] **Bước 10: Lưu trữ kế hoạch và cập nhật Walkthrough**
   - Di chuyển kế hoạch sang `docs/plans/archived/`.
   - Cập nhật `walkthrough.md`.
 
