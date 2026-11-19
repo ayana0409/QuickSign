@@ -41,6 +41,8 @@ You are **FORBIDDEN** from jumping straight into coding or outputting plans sole
   6. **Test Verification Matrix**: Happy paths, edge/boundary cases, and security/failure test cases.
 * **Execution Gate**: Do NOT write any application code while the plan status is `DRAFT`. Once approved (`APPROVED`), update status to `IN_PROGRESS`, check off (`- [x]`) each task as completed, and upon full test verification, mark `COMPLETED` and move the file to **`docs/plans/archived/`**.
 
+**Important warning**: Never include sensitive information—such as tokens, URLs, passwords, or any personal data—in **plan files**.
+
 ### Step 2: Clean Implementation
 * Write modular, type-safe, and idiomatic code following SOLID, DRY, and KISS principles.
 * Respect all layer dependency boundaries (e.g., `QuickSign.HttpApi` must ONLY reference `QuickSign.Application.Contracts`).
