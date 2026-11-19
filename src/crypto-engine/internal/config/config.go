@@ -1,13 +1,15 @@
 package config
 
 import (
+	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
 )
 
-// Config represents runtime configuration loaded from environment variables.
+// Config represents runtime configuration loaded from environment variables or .env file.
 type Config struct {
 	GRPCPort        int
 	VaultAddress    string
@@ -16,8 +18,11 @@ type Config struct {
 	VaultPathPrefix string
 }
 
-// LoadConfig reads configuration from environment variables with sensible defaults.
+// LoadConfig reads configuration from .env (if present) and environment variables.
 func LoadConfig() (*Config, error) {
+	// Attempt loading environment variables from .env if present
+	loadDotEnv()
+
 	portStr := getEnv("GRPC_PORT", "50051")
 	port, err := strconv.Atoi(portStr)
 	if err != nil {
@@ -33,6 +38,43 @@ func LoadConfig() (*Config, error) {
 	}
 
 	return cfg, nil
+}
+
+// loadDotEnv searches for a .env file in the current directory and up to 2 parent levels.
+// It sets any environment variables that are not already defined in the OS environment.
+func loadDotEnv() {
+	searchPaths := []string{".env", "../.env", "../../.env"}
+
+	for _, candidate := range searchPaths {
+		file, err := os.Open(candidate)
+		if err != nil {
+			continue
+		}
+		defer file.Close()
+
+		log.Printf("[INFO] Discovered and loading configuration from '%s'", candidate)
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := strings.TrimSpace(scanner.Text())
+			if line == "" || strings.HasPrefix(line, "#") {
+				continue
+			}
+
+			parts := strings.SplitN(line, "=", 2)
+			if len(parts) == 2 {
+				key := strings.TrimSpace(parts[0])
+				val := strings.TrimSpace(parts[1])
+				// Strip surrounding double or single quotes
+				val = strings.Trim(val, `"'`)
+
+				// Only set if not already defined in OS environment (allows CLI overrides)
+				if os.Getenv(key) == "" {
+					_ = os.Setenv(key, val)
+				}
+			}
+		}
+		return
+	}
 }
 
 func getEnv(key, defaultVal string) string {

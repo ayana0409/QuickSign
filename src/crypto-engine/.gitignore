@@ -6,6 +6,12 @@
 *.dylib
 bin/
 
+# Environment files
+.env
+*.env
+.env.*
+!.env.example
+
 # Test artifacts
 *.test
 *.out
