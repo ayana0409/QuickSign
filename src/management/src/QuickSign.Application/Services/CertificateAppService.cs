@@ -51,8 +51,9 @@ public sealed class CertificateAppService : ICertificateAppService
     {
         var userId = _currentUserService.GetRequiredUserId();
         var certId = Guid.NewGuid();
+        var validityDays = request.ValidityDays > 0 ? request.ValidityDays : 365;
         var validFrom = DateTimeOffset.UtcNow;
-        var expiresAt = validFrom.AddDays(request.ValidityDays);
+        var expiresAt = validFrom.AddDays(validityDays);
 
         // 1. Generate asymmetric key pair via Go Crypto Engine (Stores Private Key in Vault)
         var keyMaterial = await _cryptoEngineGrpcService.GenerateCertificateKeyPairAsync(
