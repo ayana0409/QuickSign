@@ -9,6 +9,7 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"crypto/x509/pkix"
+	"encoding/asn1"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -112,7 +113,14 @@ func (s *KeyGenService) GenerateKeyPair(ctx context.Context, meta domain.Certifi
 		NotBefore:             meta.ValidFrom,
 		NotAfter:              meta.ExpiresAt,
 		KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageKeyEncipherment,
-		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageCodeSigning},
+		ExtKeyUsage: []x509.ExtKeyUsage{
+			x509.ExtKeyUsageClientAuth,
+			x509.ExtKeyUsageCodeSigning,
+			x509.ExtKeyUsageEmailProtection,
+		},
+		UnknownExtKeyUsage: []asn1.ObjectIdentifier{
+			{1, 3, 6, 1, 5, 5, 7, 3, 36}, // RFC 9336 Document Signing
+		},
 		BasicConstraintsValid: true,
 		IsCA:                  false,
 	}

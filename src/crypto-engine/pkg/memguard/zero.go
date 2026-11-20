@@ -55,3 +55,13 @@ func ZeroECDSAPrivateKey(key *ecdsa.PrivateKey) {
 	}
 	ZeroBigInt(key.D)
 }
+
+// ZeroPrivateKey securely wipes any supported private key (*rsa.PrivateKey or *ecdsa.PrivateKey) from RAM.
+func ZeroPrivateKey(key any) {
+	switch k := key.(type) {
+	case *rsa.PrivateKey:
+		ZeroRSAPrivateKey(k)
+	case *ecdsa.PrivateKey:
+		ZeroECDSAPrivateKey(k)
+	}
+}
