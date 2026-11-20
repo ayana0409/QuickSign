@@ -6,7 +6,7 @@
 ## 1. Metadata
 * **Mã Kế Hoạch:** `PLAN-2026-11-19-CRYPTO-ENGINE-PHASE2`
 * **File Kế Hoạch:** `docs/plans/active/2026-11-19-crypto-engine-phase2-signing-verification.md`
-* **Trạng Thái Hiện Tại:** `PENDING_APPROVAL` *(Chờ Người Dùng Phê Duyệt)*
+* **Trạng Thái Hiện Tại:** `COMPLETED` *(Đã Hoàn Thành)*
 * **Phạm Vi Tác Động:**
   - `src/crypto-engine/` (Mở rộng toàn diện: Domain, Ports, Adapters, Services, HTTP REST API)
   - `docs/plans/` (Theo dõi tiến độ triển khai)
@@ -311,35 +311,35 @@ flowchart TD
 
 ## 6. Kế Hoạch Triển Khai Chi Tiết (Execution Checklist)
 
-- [ ] **Bước 1: Cập nhật Dependencies & Cấu hình môi trường**
+- [x] **Bước 1: Cập nhật Dependencies & Cấu hình môi trường**
   - Cập nhật `go.mod` thêm `pgx/v5`, `go-redis/v9`, `jwt/v5`, `go-qrcode`.
   - Mở rộng `internal/config/config.go` hỗ trợ `HTTP_PORT`, `DATABASE_URL`, `REDIS_ADDR`.
   - Cập nhật `.env` và `.env.example`.
-- [ ] **Bước 2: Xây dựng Domain Models & Interfaces (Ports)**
+- [x] **Bước 2: Xây dựng Domain Models & Interfaces (Ports)**
   - Tạo `internal/core/domain/signing.go` và `verification.go`.
   - Mở rộng `internal/core/ports/inbound.go` và `outbound.go`.
-- [ ] **Bước 3: Xây dựng Adapters Outbound cho Cơ sở dữ liệu & Cache**
+- [x] **Bước 3: Xây dựng Adapters Outbound cho Cơ sở dữ liệu & Cache**
   - Tạo `pgx_repository.go` kết nối PostgreSQL (truy vấn certificates, lưu signed_documents, log verification, update count).
   - Tạo `redis_adapter.go` kết nối Redis (cache API keys, de-duplicate rate limit).
-- [ ] **Bước 4: Xây dựng Adapters Mật mã học (PAdES PDF & JWS)**
+- [x] **Bước 4: Xây dựng Adapters Mật mã học (PAdES PDF & JWS)**
   - Tạo `pades_adapter.go` thực thi ký số PAdES-BES (ISO 32000-1), nhúng QR Code và PKCS#9 Signed Attributes.
   - Tạo `jws_adapter.go` thực thi ký số và xác thực JWS (RFC 7515).
-- [ ] **Bước 5: Triển khai Core Services**
+- [x] **Bước 5: Triển khai Core Services**
   - Tạo `signing_service.go` điều phối lấy khóa từ Vault, ký PAdES/JWS, xóa RAM (zeroing), lưu DB.
   - Tạo `verification_service.go` bóc tách chữ ký, đối soát hash, kiểm tra cert, cập nhật bộ đếm nguyên tử.
-- [ ] **Bước 6: Xây dựng Tầng Inbound HTTP REST API**
+- [x] **Bước 6: Xây dựng Tầng Inbound HTTP REST API**
   - Tạo `auth_middleware.go` hỗ trợ JWT Bearer và `X-API-Key`.
   - Tạo `sign_handler.go`, `verify_handler.go`, `router.go`.
-- [ ] **Bước 7: Cập nhật Entrypoint `cmd/server/main.go`**
+- [x] **Bước 7: Cập nhật Entrypoint `cmd/server/main.go`**
   - Khởi tạo DI, chạy song song gRPC (`:50051`) và HTTP (`:50052`) với graceful shutdown.
-- [ ] **Bước 8: Viết Unit Tests Toàn Diện (Go)**
+- [x] **Bước 8: Viết Unit Tests Toàn Diện (Go)**
   - Viết unit test cho `SigningService` và `VerificationService` với mock adapters.
   - Viết unit test cho `PadesAdapter` và `JwsAdapter`.
   - Chạy `go test ./tests/unit/... -v` đảm bảo 100% đỗ.
-- [ ] **Bước 9: Viết Integration Tests (Kiểm thử thực tế với Vault, DB & HTTP)**
+- [x] **Bước 9: Viết Integration Tests (Kiểm thử thực tế với Vault, DB & HTTP)**
   - Viết integration test gọi trực tiếp HTTP endpoint: Ký PDF, ký JSON, verify file hợp lệ, verify file bị sửa nội dung (tampered), tra cứu mã QR.
   - Chạy `go test ./tests/integration/... -v`.
-- [ ] **Bước 10: Nghiệm thu toàn diện & Cập nhật Walkthrough**
+- [x] **Bước 10: Nghiệm thu toàn diện & Cập nhật Walkthrough**
   - Biên dịch toàn bộ Go Crypto Engine (`go build ./cmd/server/`).
   - Kiểm tra chạy đồng thời cả .NET và Go.
   - Cập nhật `walkthrough.md` và lưu trữ kế hoạch.
