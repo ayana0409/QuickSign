@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: #050507;
+  --color-surface: #0b0c10;
+  --color-elevated: #11131a;
+
+  --color-trust-valid: #10b981;
+  --color-trust-warn: #f59e0b;
+  --color-trust-danger: #f43f5e;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: #050507;
+    color: #f4f4f5;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Subtle static film grain overlay (GPU-safe, pointer-events-none) */
+.bg-noise-overlay {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
