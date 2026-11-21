@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const REFRESH_COOKIE_NAME = "qs_refresh_token";
-const DOTNET_API_URL = process.env.DOTNET_API_URL ?? process.env.NEXT_PUBLIC_DOTNET_API_URL ?? "http://localhost:5001/api/v1";
+const SESSION_COOKIE_NAME = "qs_access_session";
+const DOTNET_API_URL =
+  process.env.DOTNET_API_URL ??
+  process.env.NEXT_PUBLIC_DOTNET_API_URL ??
+  "http://localhost:5001/api/v1";
 
 interface DotNetAuthResponse {
   access_token: string;
   token_type?: string;
   expires_in?: number;
-  refresh_token?: string;
+  refresh_token?: string | null;
 }
 
 export async function POST(request: NextRequest) {
@@ -29,11 +33,14 @@ export async function POST(request: NextRequest) {
     }
 
     const authData = data as unknown as DotNetAuthResponse;
+    const expiresIn = authData.expires_in ?? 3600;
+    const isSecure = request.nextUrl.protocol === "https:";
+
     const response = NextResponse.json(
       {
         access_token: authData.access_token,
         token_type: authData.token_type ?? "Bearer",
-        expires_in: authData.expires_in ?? 3600,
+        expires_in: expiresIn,
       },
       { status: 200 }
     );
@@ -41,10 +48,22 @@ export async function POST(request: NextRequest) {
     if (authData.refresh_token) {
       response.cookies.set(REFRESH_COOKIE_NAME, authData.refresh_token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: isSecure,
+        sameSite: "lax",
         path: "/api/auth",
         maxAge: 30 * 24 * 60 * 60,
+      });
+    }
+
+    // Also keep an HttpOnly session fallback so F5 reloads restore Zustand memory state
+    // even if the upstream SSO client does not issue a refresh_token.
+    if (authData.access_token) {
+      response.cookies.set(SESSION_COOKIE_NAME, authData.access_token, {
+        httpOnly: true,
+        secure: isSecure,
+        sameSite: "lax",
+        path: "/api/auth",
+        maxAge: expiresIn,
       });
     }
 
