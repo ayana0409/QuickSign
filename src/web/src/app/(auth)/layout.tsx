@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck } from "@phosphor-icons/react";
+import Link from "next/link";
+import { ArrowUpRight, FileMagnifyingGlass, ShieldCheck } from "@phosphor-icons/react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { useTranslation } from "@/i18n/language-context";
 import { uiStyles } from "@/styles/ui.styles";
@@ -48,6 +49,21 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               </div>
             ))}
           </div>
+
+          <div className="pt-4">
+            <Link
+              href="/verify"
+              className="group relative inline-flex min-h-[56px] w-full sm:w-auto items-center justify-between gap-5 rounded-full bg-emerald-400 px-7 py-3 text-sm font-semibold text-zinc-950 shadow-[0_0_32px_-4px_rgba(52,211,153,0.55)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-emerald-300 hover:shadow-[0_0_40px_-2px_rgba(52,211,153,0.75)] active:scale-[0.98]"
+            >
+              <span className="flex items-center gap-3">
+                <FileMagnifyingGlass size={22} weight="duotone" className="shrink-0" />
+                <span>{t.verify.header.verifyLink}</span>
+              </span>
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-950/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:scale-105">
+                <ArrowUpRight size={16} weight="bold" />
+              </span>
+            </Link>
+          </div>
         </div>
 
         <p className="relative text-xs text-zinc-500">{t.common.brandTagline}</p>
@@ -65,7 +81,21 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <LanguageSwitcher />
         </div>
 
-        <div className={uiStyles.layout.authFormCenter}>{children}</div>
+        <div className={`${uiStyles.layout.authFormCenter} space-y-4`}>
+          {children}
+
+          <Link href="/verify" className={`${uiStyles.button.verifyBannerLink} lg:hidden`}>
+            <span className="flex items-center gap-2.5">
+              <FileMagnifyingGlass size={20} weight="duotone" className="text-emerald-400 shrink-0" />
+              <span>{t.verify.header.verifyLink}</span>
+            </span>
+            <ArrowUpRight
+              size={18}
+              weight="light"
+              className="text-emerald-400 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
+        </div>
 
         <div className="h-6" aria-hidden="true" />
       </main>

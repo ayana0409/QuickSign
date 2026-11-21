@@ -11,7 +11,7 @@ import {
   isPasswordStrong,
   PasswordStrength,
 } from "@/features/auth/components/password-strength";
-import { mapAuthErrorMessage } from "@/features/auth/utils/auth-error-mapper";
+import { mapErrorMessage } from "@/i18n/map-error-message";
 import { useTranslation } from "@/i18n/language-context";
 import { authService } from "@/services/auth.service";
 import { uiStyles } from "@/styles/ui.styles";
@@ -75,7 +75,7 @@ export function RegisterForm() {
       });
       router.replace("/login?registered=1");
     } catch (err) {
-      setServerError(mapAuthErrorMessage(err, t.errors));
+      setServerError(mapErrorMessage(err, t.errors));
     } finally {
       setIsSubmitting(false);
     }

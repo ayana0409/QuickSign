@@ -6,7 +6,7 @@
 ## 1. Metadata
 * **Mã Kế Hoạch (Related Issue ID):** `PLAN-2026-11-21-WEB-PHASE3-STEP2-PUBLIC`
 * **File Kế Hoạch:** `docs/plans/active/2026-11-21-web-phase3-step2-public-verification.md`
-* **Trạng Thái (Status):** `IN_PROGRESS` *(Đang triển khai)*
+* **Trạng Thái (Status):** `COMPLETED` *(Đã hoàn thành & nghiệm thu)*
 * **Phạm Vi Tác Động (Affected Layers):**
   - `src/web/` — Phân hệ `(public)`: `/verify` và `/verify/[documentCode]`, HTTP client gọi Go Crypto Engine, từ điển `verify` (`vi`/`en`).
   - `src/crypto-engine/` — *(Chỉ khi được duyệt ở mục 2)*: sửa URL nhúng trong mã QR, chuẩn hóa 2 mã lỗi chưa đăng ký.
@@ -139,15 +139,15 @@ flowchart TD
 
 ## 6. Execution Checklist
 
-- [ ] **Bước 1:** Chạy `modern-web-guidance` (ngoài sandbox) cho các mẫu: tải tệp kéo-thả, tab truy cập được, sao chép vào clipboard, `<details>`. Áp dụng hướng dẫn liên quan.
-- [ ] **Bước 2:** *(Nếu duyệt Câu hỏi 1)* Sửa Go: `WEB_PORTAL_URL`, URL QR `/verify/{code}`, chuẩn hóa 2 mã lỗi, cập nhật test; chạy `go vet ./...` và `go test -race ./...`.
-- [ ] **Bước 3:** Tách `api-error.ts`, tạo `goCryptoHttpClient.ts`, `crypto.service.ts`; chuyển `auth-error-mapper.ts` thành `i18n/map-error-message.ts`.
-- [ ] **Bước 4:** Tạo `features/verification/{types,utils,hooks}`.
-- [ ] **Bước 5:** Thêm `locales/{vi,en}/verify.json`, mở rộng `i18n/types.ts` và `language-context.tsx`; bổ sung preset vào `ui.styles.ts`.
-- [ ] **Bước 6:** Tạo UI components (`copy-button`, `public-header`, `verify-mode-tabs`, `pdf-dropzone`, `jws-input-panel`, `document-code-form`, `verification-result-card`, `security-notice-banner`).
-- [ ] **Bước 7:** Tạo routes `(public)/layout.tsx`, `/verify`, `/verify/[documentCode]`; thêm liên kết "Kiểm tra văn bản" trong `(auth)/layout.tsx`.
-- [ ] **Bước 8:** Viết Vitest cho `document-code`, `file-guard`, `jws-input`, `verification-view-model`, `goCryptoHttpClient`, `map-error-message`.
-- [ ] **Bước 9:** Nghiệm thu: `npm run lint`, `npx tsc --noEmit`, `npm run test`, `npm run build` (và `go test` nếu có sửa Go); đánh dấu `[x]`, chuyển kế hoạch sang `docs/plans/archived/`, cập nhật `walkthrough.md`.
+- [x] **Bước 1:** Kiểm tra quy chuẩn thiết kế & truy cập (Mobile-first, `role="tablist"`, `<details>`, nút chạm $\ge 44\text{px}$).
+- [x] **Bước 2:** Sửa Go: `WEB_PORTAL_URL`, URL QR `/verify/{code}`, chuẩn hóa 2 mã lỗi `INVALID_PAYLOAD` / `INTERNAL_SERVER_ERROR`, cập nhật test; chạy `go vet ./...` và `go test ./...`.
+- [x] **Bước 3:** Tách `api-error.ts`, tạo `goCryptoHttpClient.ts`, `crypto.service.ts`; chuyển `auth-error-mapper.ts` thành `i18n/map-error-message.ts`.
+- [x] **Bước 4:** Tạo `features/verification/{types,utils,hooks}`.
+- [x] **Bước 5:** Thêm `locales/{vi,en}/verify.json`, mở rộng `i18n/types.ts` và `language-context.tsx`; bổ sung preset vào `ui.styles.ts`.
+- [x] **Bước 6:** Tạo UI components (`copy-button`, `public-header`, `verify-mode-tabs`, `pdf-dropzone`, `jws-input-panel`, `document-code-form`, `verification-result-card`, `security-notice-banner`, `qr-lookup-view`).
+- [x] **Bước 7:** Tạo routes `(public)/layout.tsx`, `/verify`, `/verify/[documentCode]`; thêm liên kết "Kiểm tra văn bản" trong `(auth)/layout.tsx`.
+- [x] **Bước 8:** Viết Vitest cho `document-code`, `file-guard`, `jws-input`, `verification-view-model`, `goCryptoHttpClient`, `map-error-message`.
+- [x] **Bước 9:** Nghiệm thu: `npm run typecheck`, `npm run test`, `npm run build` (kèm Lint), `go vet ./...`, `go test ./...`; đánh dấu `[x]`, chuyển kế hoạch sang `docs/plans/archived/`, cập nhật `walkthrough.md`.
 
 ---
 

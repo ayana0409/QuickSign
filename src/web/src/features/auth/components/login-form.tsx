@@ -8,7 +8,7 @@ import { DoubleBezelCard } from "@/components/ui/double-bezel-card";
 import { FormField } from "@/components/ui/form-field";
 import { IslandButton } from "@/components/ui/island-button";
 import { useAuth } from "@/features/auth/context/auth-context";
-import { mapAuthErrorMessage } from "@/features/auth/utils/auth-error-mapper";
+import { mapErrorMessage } from "@/i18n/map-error-message";
 import { useTranslation } from "@/i18n/language-context";
 import { uiStyles } from "@/styles/ui.styles";
 
@@ -55,7 +55,7 @@ export function LoginForm() {
       });
       router.replace("/overview");
     } catch (err) {
-      setServerError(mapAuthErrorMessage(err, t.errors));
+      setServerError(mapErrorMessage(err, t.errors));
     } finally {
       setIsSubmitting(false);
     }
