@@ -1,0 +1,95 @@
+{
+  "header": {
+    "verifyLink": "Kiểm tra văn bản",
+    "signInLink": "Đăng nhập"
+  },
+  "page": {
+    "eyebrow": "CỔNG XÁC MINH CÔNG KHAI",
+    "title": "Kiểm tra tính nguyên vẹn văn bản",
+    "subtitle": "Tải lên bản mềm hoặc dán dữ liệu đã ký để xác nhận nguồn gốc và xem nội dung có bị sửa đổi hay không.",
+    "tabs": {
+      "pdf": "Văn bản PDF",
+      "jws": "Dữ liệu điện tử"
+    },
+    "pdf": {
+      "dropTitle": "Chọn hoặc kéo thả tệp PDF vào đây",
+      "dropHint": "Hỗ trợ định dạng PDF, dung lượng tối đa 20 MB",
+      "selectedFile": "Đang kiểm tra tệp:",
+      "button": "Chọn tệp PDF"
+    },
+    "jws": {
+      "label": "Chuỗi dữ liệu đã ký",
+      "placeholder": "Dán chuỗi chữ ký hoặc nội dung tệp JSON đã ký tại đây...",
+      "loadFile": "Mở từ tệp (.txt, .json)",
+      "submit": "Kiểm tra ngay",
+      "submitting": "Đang đối soát..."
+    },
+    "codeLookup": {
+      "title": "Hoặc tra cứu nhanh bằng mã in trên văn bản",
+      "placeholder": "Ví dụ: DOC-2026-6AB19FD9",
+      "submit": "Tra cứu"
+    }
+  },
+  "qrPage": {
+    "eyebrow": "TRA CỨU TỪ MÃ QR",
+    "title": "Thông tin mã văn bản",
+    "subtitle": "Mã này được ghi nhận trên hệ thống. Để chắc chắn bản bạn đang giữ không bị chỉnh sửa, hãy tải tệp gốc lên bên dưới.",
+    "uploadSectionTitle": "Tải tệp gốc lên để kiểm tra nội dung",
+    "uploadSectionHint": "Tải tệp PDF hoặc dán dữ liệu điện tử tương ứng với mã này.",
+    "backToVerify": "Kiểm tra văn bản khác",
+    "mismatchAlert": "Cảnh báo: Tệp bạn vừa tải lên thuộc về mã văn bản khác, không khớp với mã đang tra cứu."
+  },
+  "securityNotice": {
+    "title": "Lưu ý quan trọng khi quét mã QR",
+    "body": "Mã này chỉ xác nhận văn bản từng được tạo trên hệ thống, chưa đủ để khẳng định bản in hoặc tệp bạn đang cầm là nguyên vẹn. Vui lòng tải tệp gốc lên bên dưới để kiểm tra chính xác."
+  },
+  "result": {
+    "statuses": {
+      "VALID": {
+        "title": "Văn bản nguyên vẹn",
+        "description": "Chữ ký hợp lệ và nội dung khớp hoàn toàn với bản gốc lúc ký."
+      },
+      "TAMPERED_CONTENT": {
+        "title": "Văn bản đã bị chỉnh sửa",
+        "description": "Nội dung đã thay đổi kể từ lúc ký. Không nên tin dùng bản này."
+      },
+      "CERT_REVOKED": {
+        "title": "Chữ ký đã bị thu hồi",
+        "description": "Chứng thư dùng để ký văn bản này đã bị thu hồi trước thời điểm ký."
+      },
+      "CERT_EXPIRED_AT_SIGNING": {
+        "title": "Chữ ký đã hết hạn lúc ký",
+        "description": "Chứng thư đã hết hiệu lực trước thời điểm văn bản được ký."
+      },
+      "UNKNOWN_SIGNATURE": {
+        "title": "Không nhận diện được chữ ký",
+        "description": "Tệp này không chứa chữ ký hợp lệ của QuickSign hoặc đã bị hỏng."
+      },
+      "CODE_EXISTS_UNVERIFIED_CONTENT": {
+        "title": "Mã văn bản có tồn tại",
+        "description": "Đã tìm thấy hồ sơ trên hệ thống. Hãy tải tệp gốc lên để xác nhận nội dung chưa bị sửa."
+      }
+    },
+    "fields": {
+      "signer": "Người ký",
+      "signingTime": "Thời gian ký",
+      "documentName": "Tên văn bản",
+      "revocationChecked": "Kiểm tra thu hồi",
+      "checkedYes": "Đã đối soát",
+      "checkedNo": "Chưa đối soát",
+      "detailsToggle": "Xem chi tiết kỹ thuật",
+      "documentCode": "Mã văn bản",
+      "hash": "Mã đối chiếu",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép"
+    },
+    "reset": "Kiểm tra văn bản khác"
+  },
+  "guards": {
+    "FILE_EMPTY": "Tệp được chọn đang trống.",
+    "FILE_TOO_LARGE": "Tệp vượt quá giới hạn 20 MB.",
+    "NOT_A_PDF": "Tệp này không phải định dạng PDF hợp lệ.",
+    "INVALID_JWS_FORMAT": "Nội dung chưa đúng định dạng dữ liệu đã ký.",
+    "INVALID_DOCUMENT_CODE": "Mã văn bản chưa đúng định dạng (ví dụ: DOC-2026-6AB19FD9)."
+  }
+}

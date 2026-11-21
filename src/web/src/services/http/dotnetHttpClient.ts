@@ -1,23 +1,11 @@
 import { tokenMemory } from "@/lib/token-memory";
+import {
+  ApiClientError,
+  parseUnifiedErrorResponse,
+  type UnifiedApiError,
+} from "@/services/http/api-error";
 
-export interface UnifiedApiError {
-  errorCode: string;
-  httpStatus: number;
-  timestamp?: string;
-  traceId?: string;
-  message?: string;
-  details?: Record<string, unknown>;
-}
-
-export class ApiClientError extends Error {
-  readonly payload: UnifiedApiError;
-
-  constructor(payload: UnifiedApiError) {
-    super(payload.errorCode);
-    this.name = "ApiClientError";
-    this.payload = payload;
-  }
-}
+export { ApiClientError, type UnifiedApiError };
 
 const DOTNET_BASE_URL =
   process.env.NEXT_PUBLIC_DOTNET_API_URL ?? "http://localhost:5001/api/v1";
@@ -126,7 +114,7 @@ async function request<T>(
   }
 
   if (!res.ok) {
-    const errPayload = await parseErrorResponse(res);
+    const errPayload = await parseUnifiedErrorResponse(res);
     throw new ApiClientError(errPayload);
   }
 

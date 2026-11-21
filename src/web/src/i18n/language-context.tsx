@@ -4,9 +4,11 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 import viCommon from "@/locales/vi/common.json";
 import viAuth from "@/locales/vi/auth.json";
 import viErrors from "@/locales/vi/errors.json";
+import viVerify from "@/locales/vi/verify.json";
 import enCommon from "@/locales/en/common.json";
 import enAuth from "@/locales/en/auth.json";
 import enErrors from "@/locales/en/errors.json";
+import enVerify from "@/locales/en/verify.json";
 import type { Locale, TranslationDictionary } from "./types";
 
 const DICTIONARIES: Record<Locale, TranslationDictionary> = {
@@ -14,11 +16,13 @@ const DICTIONARIES: Record<Locale, TranslationDictionary> = {
     common: viCommon,
     auth: viAuth,
     errors: viErrors,
+    verify: viVerify,
   },
   en: {
     common: enCommon,
     auth: enAuth,
     errors: enErrors,
+    verify: enVerify,
   },
 };
 

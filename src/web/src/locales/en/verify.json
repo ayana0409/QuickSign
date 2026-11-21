@@ -1,0 +1,95 @@
+{
+  "header": {
+    "verifyLink": "Verify Document",
+    "signInLink": "Sign in"
+  },
+  "page": {
+    "eyebrow": "PUBLIC VERIFICATION PORTAL",
+    "title": "Verify document integrity",
+    "subtitle": "Upload a signed file or paste signed data to confirm who signed it and whether the content is untouched.",
+    "tabs": {
+      "pdf": "PDF Document",
+      "jws": "Digital Record"
+    },
+    "pdf": {
+      "dropTitle": "Choose or drop a PDF file here",
+      "dropHint": "Supports standard PDF files up to 20 MB",
+      "selectedFile": "Checking file:",
+      "button": "Select PDF file"
+    },
+    "jws": {
+      "label": "Signed data string",
+      "placeholder": "Paste the signed string or JSON content here...",
+      "loadFile": "Open from file (.txt, .json)",
+      "submit": "Verify now",
+      "submitting": "Checking..."
+    },
+    "codeLookup": {
+      "title": "Or look up by the code printed on the document",
+      "placeholder": "Example: DOC-2026-6AB19FD9",
+      "submit": "Look up"
+    }
+  },
+  "qrPage": {
+    "eyebrow": "QR CODE LOOKUP",
+    "title": "Document record details",
+    "subtitle": "This code is registered in our records. To confirm your copy has not been altered, please upload the original file below.",
+    "uploadSectionTitle": "Upload the original file to verify content",
+    "uploadSectionHint": "Upload the PDF file or paste the digital record matching this code.",
+    "backToVerify": "Check another document",
+    "mismatchAlert": "Warning: The uploaded file belongs to a different document code and does not match the code you are viewing."
+  },
+  "securityNotice": {
+    "title": "Important notice when scanning a QR code",
+    "body": "This code only confirms the record exists in our system; it cannot prove your printed or local copy is untouched. Please upload the original file below to verify its content."
+  },
+  "result": {
+    "statuses": {
+      "VALID": {
+        "title": "Document is intact",
+        "description": "The signature is valid and the content matches the original signed version."
+      },
+      "TAMPERED_CONTENT": {
+        "title": "Document was modified",
+        "description": "This content was changed after signing and should not be trusted."
+      },
+      "CERT_REVOKED": {
+        "title": "Signature was revoked",
+        "description": "The signing certificate was revoked before this document was signed."
+      },
+      "CERT_EXPIRED_AT_SIGNING": {
+        "title": "Certificate expired before signing",
+        "description": "The signing certificate was already expired when this document was signed."
+      },
+      "UNKNOWN_SIGNATURE": {
+        "title": "Signature not recognized",
+        "description": "This file does not contain a valid QuickSign signature or may be corrupted."
+      },
+      "CODE_EXISTS_UNVERIFIED_CONTENT": {
+        "title": "Document code found",
+        "description": "The record exists in our system. Upload the original file to confirm its content is intact."
+      }
+    },
+    "fields": {
+      "signer": "Signed by",
+      "signingTime": "Signed at",
+      "documentName": "Document name",
+      "revocationChecked": "Revocation check",
+      "checkedYes": "Checked",
+      "checkedNo": "Not checked",
+      "detailsToggle": "View technical details",
+      "documentCode": "Document code",
+      "hash": "Reference fingerprint",
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "reset": "Verify another document"
+  },
+  "guards": {
+    "FILE_EMPTY": "The selected file is empty.",
+    "FILE_TOO_LARGE": "The file exceeds the 20 MB size limit.",
+    "NOT_A_PDF": "This file is not a valid PDF document.",
+    "INVALID_JWS_FORMAT": "The text is not in a valid signed data format.",
+    "INVALID_DOCUMENT_CODE": "Invalid document code format (example: DOC-2026-6AB19FD9)."
+  }
+}

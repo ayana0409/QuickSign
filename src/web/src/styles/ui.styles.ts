@@ -13,6 +13,11 @@ export const uiStyles = {
       "col-span-1 lg:col-span-5 flex flex-col justify-between px-4 py-6 sm:px-8 sm:py-10 xl:px-14",
     authFormCenter: "mx-auto w-full max-w-md my-auto py-6",
     overviewContainer: "mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 space-y-8",
+    publicContainer: "mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 space-y-6",
+    publicHeader:
+      "sticky top-0 z-20 border-b border-white/[0.06] bg-[#050507]/85 backdrop-blur-xl",
+    publicHeaderInner:
+      "mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6",
   },
   card: {
     doubleBezelOuter:
@@ -51,6 +56,10 @@ export const uiStyles = {
       "ml-3 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-950/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:scale-105",
     ghostPill:
       "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-white/[0.04] px-4 py-2 text-xs font-medium text-zinc-300 ring-1 ring-white/10 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white/[0.08] hover:text-white active:scale-[0.98] cursor-pointer",
+    verifyCtaPill:
+      "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-emerald-500/15 px-4 py-2 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-500/40 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-emerald-500/25 hover:text-emerald-200 active:scale-[0.98] cursor-pointer",
+    verifyBannerLink:
+      "group flex min-h-[48px] w-full items-center justify-between rounded-2xl bg-emerald-500/[0.08] px-4 py-3 text-sm font-medium text-emerald-300 ring-1 ring-emerald-500/30 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-emerald-500/[0.15] hover:ring-emerald-400/50 active:scale-[0.99]",
     dangerPill:
       "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-rose-500/10 px-4 py-2 text-xs font-medium text-rose-300 ring-1 ring-rose-500/25 transition-all duration-300 hover:bg-rose-500/20 active:scale-[0.98] cursor-pointer",
   },
@@ -69,5 +78,32 @@ export const uiStyles = {
       "inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-2.5 py-1 text-[11px] font-medium text-amber-300 ring-1 ring-amber-500/20",
     zinc:
       "inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-2.5 py-1 text-[11px] font-medium text-zinc-300 ring-1 ring-white/10",
+    danger:
+      "inline-flex items-center gap-1.5 rounded-full bg-rose-500/10 px-2.5 py-1 text-[11px] font-medium text-rose-300 ring-1 ring-rose-500/20",
+  },
+  tabs: {
+    list: "inline-flex w-full rounded-2xl bg-white/[0.03] p-1 ring-1 ring-white/[0.08]",
+    tabBase:
+      "flex-1 min-h-[44px] rounded-xl px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60",
+    tabActive: "bg-white text-zinc-950 shadow-sm",
+    tabInactive: "text-zinc-400 hover:text-white",
+  },
+  dropzone: {
+    base: "group relative flex min-h-[190px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-6 text-center transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-emerald-400/50 hover:bg-white/[0.04] focus-within:ring-2 focus-within:ring-emerald-500/60",
+    dragging: "border-emerald-400 bg-emerald-500/[0.06]",
+    iconWrap:
+      "flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.04] text-emerald-400 ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105",
+  },
+  resultCard: {
+    valid: "rounded-2xl bg-emerald-500/[0.07] p-5 ring-1 ring-emerald-500/25 space-y-4",
+    warning: "rounded-2xl bg-amber-500/[0.07] p-5 ring-1 ring-amber-500/25 space-y-4",
+    danger: "rounded-2xl bg-rose-500/[0.07] p-5 ring-1 ring-rose-500/25 space-y-4",
+    neutral: "rounded-2xl bg-white/[0.03] p-5 ring-1 ring-white/10 space-y-4",
+  },
+  detailsDrawer: {
+    root: "rounded-2xl bg-white/[0.02] ring-1 ring-white/[0.07] overflow-hidden",
+    summary:
+      "flex min-h-[44px] cursor-pointer items-center justify-between px-4 py-2.5 text-xs font-medium text-zinc-300 select-none hover:bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60",
+    body: "border-t border-white/[0.06] px-4 py-3 space-y-2.5",
   },
 } as const;
