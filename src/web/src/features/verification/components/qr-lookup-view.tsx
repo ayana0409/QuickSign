@@ -87,54 +87,60 @@ export function QrLookupView({ rawCode }: { rawCode: string }) {
 
           {codeLookup.result && (
             <>
-              <SecurityNoticeBanner />
-              <VerificationResultCard result={codeLookup.result} />
+              {!fileVerify.result && (
+                <>
+                  <SecurityNoticeBanner />
+                  <VerificationResultCard result={codeLookup.result} />
+                </>
+              )}
 
-              <div className="pt-4 border-t border-white/[0.06] space-y-4">
-                <div className="space-y-1">
-                  <h2 className="text-base font-semibold text-white">
-                    {t.verify.qrPage.uploadSectionTitle}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-zinc-400">
-                    {t.verify.qrPage.uploadSectionHint}
-                  </p>
-                </div>
+              {fileVerify.result ? (
+                <div className="space-y-4">
+                  {hasMismatch && (
+                    <div className={uiStyles.alert.error} role="alert">
+                      <WarningCircle size={18} weight="fill" className="shrink-0 mt-0.5" />
+                      <span>{t.verify.qrPage.mismatchAlert}</span>
+                    </div>
+                  )}
 
-                <VerifyModeTabs mode={mode} onChange={setMode} />
-
-                {mode === "pdf" ? (
-                  <PdfDropzone
-                    isChecking={fileVerify.isChecking}
-                    onSelectFile={(file) => void fileVerify.verifyPdf(file)}
-                  />
-                ) : (
-                  <JwsInputPanel
-                    isChecking={fileVerify.isChecking}
-                    onSubmitJws={(token) => void fileVerify.verifyJws(token)}
-                  />
-                )}
-
-                {fileVerify.phase === "error" && (
-                  <div className={uiStyles.alert.error} role="alert">
-                    <WarningCircle size={18} weight="fill" className="shrink-0 mt-0.5" />
-                    <span>{mapErrorMessage(fileVerify.error, t.errors)}</span>
-                  </div>
-                )}
-
-                {hasMismatch && (
-                  <div className={uiStyles.alert.error} role="alert">
-                    <WarningCircle size={18} weight="fill" className="shrink-0 mt-0.5" />
-                    <span>{t.verify.qrPage.mismatchAlert}</span>
-                  </div>
-                )}
-
-                {fileVerify.result && (
                   <VerificationResultCard
                     result={fileVerify.result}
                     onReset={fileVerify.reset}
                   />
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="pt-4 border-t border-white/[0.06] space-y-4">
+                  <div className="space-y-1">
+                    <h2 className="text-base font-semibold text-white">
+                      {t.verify.qrPage.uploadSectionTitle}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-zinc-400">
+                      {t.verify.qrPage.uploadSectionHint}
+                    </p>
+                  </div>
+
+                  <VerifyModeTabs mode={mode} onChange={setMode} />
+
+                  {mode === "pdf" ? (
+                    <PdfDropzone
+                      isChecking={fileVerify.isChecking}
+                      onSelectFile={(file) => void fileVerify.verifyPdf(file)}
+                    />
+                  ) : (
+                    <JwsInputPanel
+                      isChecking={fileVerify.isChecking}
+                      onSubmitJws={(token) => void fileVerify.verifyJws(token)}
+                    />
+                  )}
+
+                  {fileVerify.phase === "error" && (
+                    <div className={uiStyles.alert.error} role="alert">
+                      <WarningCircle size={18} weight="fill" className="shrink-0 mt-0.5" />
+                      <span>{mapErrorMessage(fileVerify.error, t.errors)}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>

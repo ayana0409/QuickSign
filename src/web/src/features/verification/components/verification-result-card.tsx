@@ -113,7 +113,7 @@ export function VerificationResultCard({
           </summary>
           <div className={uiStyles.detailsDrawer.body}>
             {result.documentCode && (
-              <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
                 <div className="space-y-0.5 min-w-0">
                   <p className="text-[11px] uppercase tracking-wider text-zinc-500">
                     {t.verify.result.fields.documentCode}
@@ -122,17 +122,19 @@ export function VerificationResultCard({
                     {result.documentCode}
                   </p>
                 </div>
-                <CopyButton
-                  value={result.documentCode}
-                  label={t.verify.result.fields.copy}
-                  copiedLabel={t.verify.result.fields.copied}
-                />
+                <div className="shrink-0">
+                  <CopyButton
+                    value={result.documentCode}
+                    label={t.verify.result.fields.copy}
+                    copiedLabel={t.verify.result.fields.copied}
+                  />
+                </div>
               </div>
             )}
 
             {result.sha256Hash && (
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/[0.05]">
-                <div className="space-y-0.5 min-w-0 flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-2.5 border-t border-white/[0.05]">
+                <div className="space-y-0.5 min-w-0">
                   <p className="text-[11px] uppercase tracking-wider text-zinc-500">
                     {t.verify.result.fields.hash}
                   </p>
@@ -140,11 +142,13 @@ export function VerificationResultCard({
                     {result.sha256Hash}
                   </p>
                 </div>
-                <CopyButton
-                  value={result.sha256Hash}
-                  label={t.verify.result.fields.copy}
-                  copiedLabel={t.verify.result.fields.copied}
-                />
+                <div className="shrink-0">
+                  <CopyButton
+                    value={result.sha256Hash}
+                    label={t.verify.result.fields.copy}
+                    copiedLabel={t.verify.result.fields.copied}
+                  />
+                </div>
               </div>
             )}
           </div>
