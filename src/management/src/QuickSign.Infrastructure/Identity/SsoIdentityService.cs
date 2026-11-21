@@ -49,7 +49,7 @@ public sealed class SsoIdentityService : ISsoIdentityService
             ["client_id"] = _options.ClientId,
             ["username"] = request.UsernameOrEmail,
             ["password"] = request.Password,
-            ["scope"] = _options.Scope
+            ["scope"] = EnsureOfflineAccessScope(_options.Scope)
         };
 
         if (!string.IsNullOrWhiteSpace(_options.ClientSecret))
@@ -74,10 +74,22 @@ public sealed class SsoIdentityService : ISsoIdentityService
             }
 
             var tokenDto = await response.Content.ReadFromJsonAsync<AuthTokenResponseDto>(cancellationToken: cancellationToken);
-            return tokenDto ?? throw new BusinessException(
-                QuickSignDomainErrorCodes.InvalidCredentials,
-                "Empty token payload received from Identity Provider.",
-                401);
+            if (tokenDto is null)
+            {
+                throw new BusinessException(
+                    QuickSignDomainErrorCodes.InvalidCredentials,
+                    "Empty token payload received from Identity Provider.",
+                    401);
+            }
+
+            if (string.IsNullOrWhiteSpace(tokenDto.RefreshToken))
+            {
+                _logger.LogWarning(
+                    "SSO Identity Provider did not return a refresh_token for client '{ClientId}'. Ensure 'offline_access' scope and refresh_token grant are enabled on the SSO client.",
+                    _options.ClientId);
+            }
+
+            return tokenDto;
         }
         catch (BusinessException)
         {
@@ -140,7 +152,7 @@ public sealed class SsoIdentityService : ISsoIdentityService
             ["grant_type"] = "refresh_token",
             ["client_id"] = _options.ClientId,
             ["refresh_token"] = refreshToken,
-            ["scope"] = _options.Scope
+            ["scope"] = EnsureOfflineAccessScope(_options.Scope)
         };
 
         if (!string.IsNullOrWhiteSpace(_options.ClientSecret))
@@ -183,5 +195,22 @@ public sealed class SsoIdentityService : ISsoIdentityService
                 503,
                 innerException: ex);
         }
+    }
+
+    /// <summary>
+    /// Ensures 'offline_access' is included in the OAuth scope so the SSO Identity Server issues a refresh_token.
+    /// </summary>
+    private static string EnsureOfflineAccessScope(string? configuredScope)
+    {
+        var scopes = (configuredScope ?? string.Empty)
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .ToList();
+
+        if (!scopes.Contains("offline_access", StringComparer.OrdinalIgnoreCase))
+        {
+            scopes.Add("offline_access");
+        }
+
+        return string.Join(' ', scopes);
     }
 }
