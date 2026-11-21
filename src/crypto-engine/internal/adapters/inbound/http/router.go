@@ -6,6 +6,9 @@ import (
 	"time"
 
 	httpSwagger "github.com/swaggo/http-swagger"
+
+	// Register generated OpenAPI/Swagger specification for the HTTP router.
+	_ "quicksign/crypto-engine/docs"
 )
 
 // RouterConfig contains dependencies for building the HTTP server router.

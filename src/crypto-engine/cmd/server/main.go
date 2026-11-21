@@ -25,9 +25,6 @@ import (
 	"quicksign/crypto-engine/internal/config"
 	"quicksign/crypto-engine/internal/core/services"
 	"quicksign/crypto-engine/pb"
-
-	// Import generated Swagger docs — only compiled in when docs/ package exists.
-	_ "quicksign/crypto-engine/docs"
 )
 
 // @title           QuickSign Crypto Engine API
@@ -157,7 +154,7 @@ func main() {
 			AuthMiddleware: authMiddleware,
 			SignHandler:    signHandler,
 			VerifyHandler:  verifyHandler,
-			DevMode:        cfg.AppEnv == "development",
+			DevMode:        cfg.IsDevelopment(),
 		})
 
 		httpServer = &http.Server{
@@ -183,6 +180,9 @@ func main() {
 	if httpServer != nil {
 		go func() {
 			log.Printf("[INFO] QuickSign Crypto Engine REST HTTP server listening on :%d", cfg.HTTPPort)
+			if cfg.IsDevelopment() {
+				log.Printf("[INFO] Swagger UI available at http://localhost:%d/swagger/index.html", cfg.HTTPPort)
+			}
 			if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 				log.Fatalf("[FATAL] HTTP REST server terminated with error: %v", err)
 			}

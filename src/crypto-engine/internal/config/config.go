@@ -59,6 +59,11 @@ func LoadConfig() (*Config, error) {
 	return cfg, nil
 }
 
+// IsDevelopment reports whether the engine is running in a local development environment.
+func (c *Config) IsDevelopment() bool {
+	return c.AppEnv == "development" || c.AppEnv == "dev"
+}
+
 func loadDotEnv() {
 	searchPaths := []string{".env", "../.env", "../../.env"}
 

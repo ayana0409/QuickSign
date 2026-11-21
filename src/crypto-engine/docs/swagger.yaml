@@ -1,0 +1,320 @@
+basePath: /
+definitions:
+  domain.ValidationStatus:
+    enum:
+    - VALID
+    - TAMPERED_CONTENT
+    - CERT_REVOKED
+    - CERT_EXPIRED_AT_SIGNING
+    - UNKNOWN_SIGNATURE
+    - CODE_EXISTS_UNVERIFIED_CONTENT
+    type: string
+    x-enum-varnames:
+    - StatusValid
+    - StatusTamperedContent
+    - StatusCertRevoked
+    - StatusCertExpiredAtSigning
+    - StatusUnknownSignature
+    - StatusCodeExistsUnverified
+  domain.VerifyResult:
+    properties:
+      documentCode:
+        type: string
+      documentName:
+        type: string
+      isValid:
+        type: boolean
+      revocationChecked:
+        type: boolean
+      sha256Hash:
+        type: string
+      signerSubject:
+        type: string
+      signingTime:
+        type: string
+      validationStatus:
+        $ref: '#/definitions/domain.ValidationStatus'
+      verificationWarning:
+        type: string
+    type: object
+  http.ErrorResponse:
+    properties:
+      details:
+        additionalProperties: {}
+        type: object
+      errorCode:
+        type: string
+      httpStatus:
+        type: integer
+      message:
+        type: string
+      timestamp:
+        type: string
+      traceId:
+        type: string
+    type: object
+  http.signJsonRequest:
+    properties:
+      certificateId:
+        type: string
+      payload:
+        additionalProperties: {}
+        type: object
+    type: object
+  http.signJsonResponse:
+    properties:
+      createdAt:
+        type: string
+      documentCode:
+        type: string
+      jws:
+        type: string
+      payloadHash:
+        type: string
+    type: object
+  http.verifyJwsRequest:
+    properties:
+      jws:
+        description: JWS compact serialization token (header.payload.signature)
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpPU0UiLCJqdGkiOiJET0MtMjAyNi02QUIxOUZEOSJ9.eyJpbnZvaWNlTnVtYmVyIjoiSU5WLTIwMjYtOTk5OSIsImFtb3VudCI6MTI1MDAwMDB9.signature
+        type: string
+    type: object
+host: localhost:50052
+info:
+  contact:
+    name: QuickSign Engineering
+    url: https://github.com/quicksign
+  description: |-
+    Go Crypto Engine — HTTP REST API for PDF/JSON signing (PAdES & JWS) and document verification.
+    Supports dual authentication: JWT Bearer (Web Portal) and X-API-Key (third-party integrations).
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: QuickSign Crypto Engine API
+  version: "1.0"
+paths:
+  /api/v1/sign/json:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Signs a structured JSON payload using JWS Compact Serialization (RFC 7515).
+        Supports RS256 (RSA-2048) and ES256 (ECDSA-P256). The document code is embedded
+        in the JWT Header `jti` claim for later verification.
+      parameters:
+      - description: JSON payload and optional certificate selection
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/http.signJsonRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JWS compact token and document metadata
+          headers:
+            X-Document-Code:
+              description: Generated document tracking code
+              type: string
+          schema:
+            $ref: '#/definitions/http.signJsonResponse'
+        "400":
+          description: Invalid request body or empty payload
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "401":
+          description: Authentication required
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "404":
+          description: Active signing certificate not found
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "422":
+          description: Certificate revoked or expired at time of signing
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "500":
+          description: Internal signing error
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Sign a JSON payload
+      tags:
+      - Signing
+  /api/v1/sign/pdf:
+    post:
+      consumes:
+      - multipart/form-data
+      description: |-
+        Upload a PDF file for digital signing using PAdES-BES (ISO 32000-1). A visual QR code
+        appearance is embedded at the bottom of the first page, and the document code is stored
+        in PKCS#9 Signed Attributes for later verification.
+      parameters:
+      - description: PDF file to sign (max 25 MB)
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Certificate UUID to use. If omitted, the user's active certificate
+          is selected automatically.
+        in: formData
+        name: certificateId
+        type: string
+      - description: Reason for signing (embedded in the signature dictionary)
+        in: formData
+        name: reason
+        type: string
+      - description: Location of signing (embedded in the signature dictionary)
+        in: formData
+        name: location
+        type: string
+      produces:
+      - application/pdf
+      responses:
+        "200":
+          description: Signed PDF file
+          headers:
+            X-Document-Code:
+              description: Generated document tracking code (e.g. DOC-2026-6AB19FD9)
+              type: string
+          schema:
+            type: file
+        "400":
+          description: Invalid PDF or missing required fields
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "401":
+          description: Authentication required
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "404":
+          description: Active signing certificate not found
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "422":
+          description: Certificate revoked or expired at time of signing
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "500":
+          description: Internal signing error
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Sign a PDF document
+      tags:
+      - Signing
+  /api/v1/verify/code/{documentCode}:
+    get:
+      description: |-
+        Looks up a document by its tracking code (scanned from the QR printed on the document).
+        Returns `CODE_EXISTS_UNVERIFIED_CONTENT` per ADR 0001 §6 (Security Illusion Prevention):
+        the caller is informed the code exists but is **not** guaranteed the content is intact.
+        The user must upload the original file to `/api/v1/verify/file` for full content verification.
+      parameters:
+      - description: Document code embedded in the QR (e.g. DOC-2026-6AB19FD9)
+        in: path
+        name: documentCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Code exists — verification warning included
+          schema:
+            $ref: '#/definitions/domain.VerifyResult'
+        "400":
+          description: Missing or empty document code
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "404":
+          description: Document code not found in the system
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+      summary: Public QR code lookup
+      tags:
+      - Verification
+  /api/v1/verify/file:
+    post:
+      consumes:
+      - multipart/form-data
+      - application/json
+      description: |-
+        Verifies the cryptographic integrity of an uploaded PDF (PAdES) or JWS token.
+        Accepts two content types:
+        - **multipart/form-data** with field `file` for PDF files.
+        - **application/json** with field `jws` containing a compact JWS string.
+
+        The service extracts the embedded signature, re-computes the hash, compares against
+        the stored original hash, and checks the certificate validity at signing time.
+        Any content modification (even 1 byte) returns `TAMPERED_CONTENT`.
+      parameters:
+      - description: Signed PDF file (multipart/form-data)
+        in: formData
+        name: file
+        type: file
+      - description: JWS token wrapper (application/json)
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/http.verifyJwsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Verification result
+          schema:
+            $ref: '#/definitions/domain.VerifyResult'
+        "400":
+          description: Empty or unreadable payload
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "500":
+          description: Internal verification error
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Verify a signed document
+      tags:
+      - Verification
+  /health:
+    get:
+      description: Returns service health status and timestamp
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: healthy
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Health check
+      tags:
+      - Health
+securityDefinitions:
+  ApiKeyAuth:
+    description: 'QuickSign API Key — format: "qs_live_{32-hex-bytes}"'
+    in: header
+    name: X-API-Key
+    type: apiKey
+  BearerAuth:
+    description: 'JWT Bearer token from QuickBite Identity — format: "Bearer {token}"'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
+tags:
+- description: Endpoints for signing PDF and JSON documents
+  name: Signing
+- description: Endpoints for verifying document integrity and QR code lookup
+  name: Verification
+- description: Service health probe
+  name: Health

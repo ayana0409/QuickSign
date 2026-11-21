@@ -378,3 +378,48 @@ func TestHttpServer_SignPdfAndVerify_EndToEnd(t *testing.T) {
 	assert.Equal(t, docCode, verifyResp.DocumentCode)
 	assert.Equal(t, "Integration Test Issuer", verifyResp.SignerSubject)
 }
+
+func TestHttpServer_SwaggerUI_EnabledInDevMode(t *testing.T) {
+	authMw := httpInbound.NewAuthMiddleware(newInMemoryIntegrationRepo(), nil, "")
+	router := httpInbound.NewRouter(httpInbound.RouterConfig{
+		AuthMiddleware: authMw,
+		DevMode:        true,
+	})
+
+	// 1. /swagger redirects to /swagger/index.html
+	reqRedirect := httptest.NewRequest(http.MethodGet, "/swagger", nil)
+	recRedirect := httptest.NewRecorder()
+	router.ServeHTTP(recRedirect, reqRedirect)
+	assert.Equal(t, http.StatusMovedPermanently, recRedirect.Code)
+	assert.Equal(t, "/swagger/index.html", recRedirect.Header().Get("Location"))
+
+	// 2. /swagger/index.html serves Swagger UI page
+	reqUI := httptest.NewRequest(http.MethodGet, "/swagger/index.html", nil)
+	recUI := httptest.NewRecorder()
+	router.ServeHTTP(recUI, reqUI)
+	assert.Equal(t, http.StatusOK, recUI.Code)
+	assert.Contains(t, recUI.Body.String(), "Swagger UI")
+
+	// 3. /swagger/doc.json serves valid OpenAPI JSON spec
+	reqDoc := httptest.NewRequest(http.MethodGet, "/swagger/doc.json", nil)
+	recDoc := httptest.NewRecorder()
+	router.ServeHTTP(recDoc, reqDoc)
+	assert.Equal(t, http.StatusOK, recDoc.Code)
+	assert.Contains(t, recDoc.Body.String(), "QuickSign Crypto Engine API")
+	assert.Contains(t, recDoc.Body.String(), "/api/v1/sign/pdf")
+}
+
+func TestHttpServer_SwaggerUI_DisabledInProductionMode(t *testing.T) {
+	authMw := httpInbound.NewAuthMiddleware(newInMemoryIntegrationRepo(), nil, "")
+	router := httpInbound.NewRouter(httpInbound.RouterConfig{
+		AuthMiddleware: authMw,
+		DevMode:        false,
+	})
+
+	for _, path := range []string{"/swagger", "/swagger/index.html", "/swagger/doc.json"} {
+		req := httptest.NewRequest(http.MethodGet, path, nil)
+		rec := httptest.NewRecorder()
+		router.ServeHTTP(rec, req)
+		assert.Equal(t, http.StatusNotFound, rec.Code, "Swagger endpoint %s must return 404 when DevMode is false", path)
+	}
+}
