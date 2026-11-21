@@ -1,0 +1,12 @@
+{
+  "brandName": "QuickSign",
+  "brandTagline": "Secure digital signing and document authenticity",
+  "loading": "Processing...",
+  "checkingSession": "Checking your session...",
+  "logout": "Sign out",
+  "languageLabel": "Language",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "roleUser": "Member",
+  "roleAdmin": "Administrator"
+}

@@ -6,7 +6,7 @@
 ## 1. Metadata
 * **Mã Kế Hoạch (Related Issue ID):** `PLAN-2026-11-21-WEB-PHASE3-STEP1-AUTH`
 * **File Kế Hoạch:** `docs/plans/active/2026-11-21-web-phase3-step1-auth.md`
-* **Trạng Thái (Status):** `APPROVED` *(Đã được người dùng phê duyệt)*
+* **Trạng Thái (Status):** `COMPLETED` *(Đã hoàn thành & nghiệm thu)*
 * **Phạm Vi Tác Động (Affected Layers):**
   - `src/web/` (Khởi tạo mới toàn bộ ứng dụng Next.js App Router và phân hệ `(auth)`)
   - `docs/plans/` (Lưu trữ và theo dõi tiến độ theo quy trình `AGENT.md`)
@@ -106,15 +106,15 @@ Theo mục 4 tài liệu kiến trúc `docs/quicksign_software_architecture.md`,
 
 ## 6. Execution Checklist (Danh Sách Công Việc Chi Tiết)
 
-- [ ] **Bước 1:** Khởi tạo cấu trúc dự án Next.js (`src/web`): `package.json`, `tsconfig.json`, `next.config.ts`, `postcss.config.mjs`, `vitest.config.ts`, `.env.example`, và cài đặt dependencies.
-- [ ] **Bước 2:** Xây dựng tầng giao diện chung: `src/app/globals.css` (Geist fonts & tokens) và `src/styles/ui.styles.ts`.
-- [ ] **Bước 3:** Xây dựng tầng đa ngôn ngữ (`vi` & `en`): `src/locales/{vi,en}/{errors,common,auth}.json`, `src/i18n/types.ts`, `src/i18n/language-context.tsx`.
-- [ ] **Bước 4:** Xây dựng tầng Token In-Memory (`src/lib/token-memory.ts`), BFF HttpOnly Cookie Route Handlers (`/api/auth/login`, `/api/auth/refresh`, `/api/auth/logout`), `dotnetHttpClient.ts` và `auth.service.ts`.
-- [ ] **Bước 5:** Xây dựng UI Primitives (`double-bezel-card.tsx`, `island-button.tsx`, `form-field.tsx`, `language-switcher.tsx`).
-- [ ] **Bước 6:** Xây dựng module `features/auth` (`auth-context.tsx`, `auth-error-mapper.ts`, `password-strength.tsx`, `login-form.tsx`, `register-form.tsx`).
-- [ ] **Bước 7:** Xây dựng các trang App Router: `app/layout.tsx`, `app/page.tsx`, `(auth)/layout.tsx`, `(auth)/login/page.tsx`, `(auth)/register/page.tsx`, và `(dashboard)/overview/page.tsx` (Authenticated Shell).
-- [ ] **Bước 8:** Viết bộ Unit Tests tự động (Vitest) cho `token-memory.ts` (giải mã JWT single-role & multi-role array, kiểm tra hết hạn), `auth-error-mapper.ts` (ánh xạ `vi`/`en` & fallback), và `dotnetHttpClient.ts` (Single-Flight Refresh & gắn Bearer header).
-- [ ] **Bước 9:** Chạy nghiệm thu toàn diện (`npm run lint`, `npx tsc --noEmit`, `npm run test`, `npm run build`), cập nhật checklist sang `[x]`, chuyển plan sang `docs/plans/archived/` và cập nhật `walkthrough.md`.
+- [x] **Bước 1:** Khởi tạo cấu trúc dự án Next.js (`src/web`): `package.json`, `tsconfig.json`, `next.config.ts`, `postcss.config.mjs`, `vitest.config.ts`, `.env.example`, và cài đặt dependencies.
+- [x] **Bước 2:** Xây dựng tầng giao diện chung: `src/app/globals.css` (Geist fonts & tokens) và `src/styles/ui.styles.ts`.
+- [x] **Bước 3:** Xây dựng tầng đa ngôn ngữ (`vi` & `en`): `src/locales/{vi,en}/{errors,common,auth}.json`, `src/i18n/types.ts`, `src/i18n/language-context.tsx`.
+- [x] **Bước 4:** Xây dựng tầng Token In-Memory (`src/lib/token-memory.ts`), BFF HttpOnly Cookie Route Handlers (`/api/auth/login`, `/api/auth/refresh`, `/api/auth/logout`), `dotnetHttpClient.ts` và `auth.service.ts`.
+- [x] **Bước 5:** Xây dựng UI Primitives (`double-bezel-card.tsx`, `island-button.tsx`, `form-field.tsx`, `language-switcher.tsx`).
+- [x] **Bước 6:** Xây dựng module `features/auth` (`auth-context.tsx`, `auth-error-mapper.ts`, `password-strength.tsx`, `login-form.tsx`, `register-form.tsx`).
+- [x] **Bước 7:** Xây dựng các trang App Router: `app/layout.tsx`, `app/page.tsx`, `(auth)/layout.tsx`, `(auth)/login/page.tsx`, `(auth)/register/page.tsx`, và `(dashboard)/overview/page.tsx` (Authenticated Shell).
+- [x] **Bước 8:** Viết bộ Unit Tests tự động (Vitest) cho `token-memory.ts` (giải mã JWT single-role & multi-role array, kiểm tra hết hạn), `auth-error-mapper.ts` (ánh xạ `vi`/`en` & fallback), và `dotnetHttpClient.ts` (Single-Flight Refresh & gắn Bearer header).
+- [x] **Bước 9:** Chạy nghiệm thu toàn diện (`npm run lint`, `npx tsc --noEmit`, `npm run test`, `npm run build`), cập nhật checklist sang `[x]`, chuyển plan sang `docs/plans/archived/` và cập nhật `walkthrough.md`.
 
 ---
 

@@ -1,0 +1,12 @@
+{
+  "brandName": "QuickSign",
+  "brandTagline": "Ký số an toàn và xác thực nguồn gốc văn bản",
+  "loading": "Đang xử lý...",
+  "checkingSession": "Đang kiểm tra phiên làm việc...",
+  "logout": "Đăng xuất",
+  "languageLabel": "Ngôn ngữ",
+  "showPassword": "Hiện mật khẩu",
+  "hidePassword": "Ẩn mật khẩu",
+  "roleUser": "Thành viên",
+  "roleAdmin": "Quản trị viên"
+}
