@@ -2,13 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShieldCheck } from "@phosphor-icons/react";
+import { ChartBar, ShieldCheck } from "@phosphor-icons/react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { useAuth } from "@/features/auth/context/auth-context";
 import { useTranslation } from "@/i18n/language-context";
 import { uiStyles } from "@/styles/ui.styles";
 
 export function PublicHeader() {
   const { t } = useTranslation();
+  const { isAuthenticated, isBootstrapping } = useAuth();
 
   return (
     <header className={uiStyles.layout.publicHeader}>
@@ -24,9 +26,17 @@ export function PublicHeader() {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <Link href="/login" className={uiStyles.button.ghostPill}>
-            <span>{t.verify.header.signInLink}</span>
-          </Link>
+          {!isBootstrapping &&
+            (isAuthenticated ? (
+              <Link href="/overview" className={uiStyles.button.verifyCtaPill}>
+                <ChartBar size={16} weight="duotone" />
+                <span>{t.dashboard.nav.overview}</span>
+              </Link>
+            ) : (
+              <Link href="/login" className={uiStyles.button.ghostPill}>
+                <span>{t.verify.header.signInLink}</span>
+              </Link>
+            ))}
         </div>
       </div>
     </header>
