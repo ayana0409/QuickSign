@@ -1,14 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight, FileMagnifyingGlass, ShieldCheck } from "@phosphor-icons/react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { useAuth } from "@/features/auth/context/auth-context";
 import { useTranslation } from "@/i18n/language-context";
 import { uiStyles } from "@/styles/ui.styles";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const { isAuthenticated, isBootstrapping } = useAuth();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (!isBootstrapping && isAuthenticated) {
+      router.replace("/overview");
+    }
+  }, [isBootstrapping, isAuthenticated, router]);
 
   return (
     <div className={uiStyles.layout.authSplitContainer}>
