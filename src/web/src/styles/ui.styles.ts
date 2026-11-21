@@ -18,6 +18,11 @@ export const uiStyles = {
       "sticky top-0 z-20 border-b border-white/[0.06] bg-[#050507]/85 backdrop-blur-xl",
     publicHeaderInner:
       "mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6",
+    dashboardShell: "min-h-[100dvh] flex flex-col lg:flex-row",
+    dashboardSidebar:
+      "hidden lg:flex lg:w-64 lg:shrink-0 flex-col justify-between border-r border-white/[0.06] bg-[#07080B] p-5",
+    dashboardMain: "flex-1 min-w-0 px-4 py-6 sm:px-8 sm:py-8 lg:px-10",
+    dashboardContent: "mx-auto max-w-5xl space-y-6",
   },
   card: {
     doubleBezelOuter:
@@ -105,5 +110,23 @@ export const uiStyles = {
     summary:
       "flex min-h-[44px] cursor-pointer items-center justify-between px-4 py-2.5 text-xs font-medium text-zinc-300 select-none hover:bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60",
     body: "border-t border-white/[0.06] px-4 py-3 space-y-2.5",
+  },
+  nav: {
+    itemBase:
+      "flex min-h-[44px] items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors duration-200",
+    itemActive: "bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/25",
+    itemInactive: "text-zinc-400 hover:bg-white/[0.04] hover:text-white",
+  },
+  table: {
+    wrapper: "hidden md:block overflow-x-auto rounded-2xl ring-1 ring-white/[0.08] bg-[#0B0C10]",
+    table: "w-full text-left text-sm",
+    thead: "border-b border-white/[0.06] text-[11px] uppercase tracking-wider text-zinc-500",
+    th: "px-4 py-3.5 font-medium",
+    tr: "border-b border-white/[0.04] last:border-none hover:bg-white/[0.02] transition-colors",
+    td: "px-4 py-3.5 align-middle",
+  },
+  modal: {
+    dialog:
+      "m-auto w-[calc(100%-2rem)] max-w-lg rounded-[2rem] bg-transparent p-0 text-zinc-100 backdrop:bg-black/75 backdrop:backdrop-blur-sm open:animate-in",
   },
 } as const;

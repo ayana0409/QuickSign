@@ -1,0 +1,220 @@
+{
+  "nav": {
+    "overview": "Tổng quan",
+    "sign": "Ký văn bản",
+    "certificates": "Chữ ký của tôi",
+    "apiKeys": "Khóa kết nối",
+    "documents": "Hồ sơ đã ký",
+    "verifyPublic": "Kiểm tra công khai"
+  },
+  "overview": {
+    "eyebrow": "BẢNG ĐIỀU KHIỂN",
+    "title": "Tổng quan hoạt động",
+    "subtitle": "Theo dõi tình hình ký số, lượt kiểm tra và trạng thái bảo mật tài liệu của bạn.",
+    "kpis": {
+      "totalSigned": "Văn bản đã ký",
+      "totalVerifications": "Tổng lượt kiểm tra",
+      "uniqueVerifications": "Lượt kiểm tra duy nhất",
+      "tamperedAlerts": "Cảnh báo chỉnh sửa"
+    },
+    "quota": {
+      "title": "Hạn mức chữ ký đang hoạt động",
+      "countLabel": "{active} / 5 chữ ký",
+      "activeKeys": "{count} khóa kết nối đang bật",
+      "manageCerts": "Quản lý chữ ký",
+      "signNow": "Ký văn bản mới"
+    },
+    "recent": {
+      "title": "Văn bản ký gần đây",
+      "viewAll": "Xem tất cả",
+      "emptyTitle": "Chưa có văn bản nào được ký",
+      "emptyDesc": "Hãy bắt đầu bằng việc tải lên một văn bản PDF hoặc dữ liệu điện tử để ký."
+    }
+  },
+  "sign": {
+    "eyebrow": "PHÒNG KÝ SỐ",
+    "title": "Ký văn bản mới",
+    "subtitle": "Chọn chữ ký của bạn và tải lên văn bản cần đóng dấu xác nhận.",
+    "tabs": {
+      "pdf": "Văn bản PDF",
+      "json": "Dữ liệu điện tử"
+    },
+    "noCertTitle": "Bạn chưa có chữ ký nào đang hoạt động",
+    "noCertDesc": "Vui lòng tạo ít nhất một chữ ký trước khi thực hiện ký văn bản.",
+    "goToCerts": "Tạo chữ ký ngay",
+    "form": {
+      "certLabel": "Chọn chữ ký sử dụng",
+      "autoSelect": "Tự động chọn chữ ký mới nhất",
+      "reasonLabel": "Lý do ký (tùy chọn)",
+      "reasonPlaceholder": "Ví dụ: Phê duyệt hợp đồng",
+      "locationLabel": "Địa điểm (tùy chọn)",
+      "locationPlaceholder": "Ví dụ: Hà Nội, Việt Nam",
+      "pdfDropTitle": "Chọn hoặc kéo thả tệp PDF cần ký",
+      "pdfDropHint": "Tối đa 20 MB",
+      "submitPdf": "Ký và tải tệp về",
+      "submitting": "Đang đóng dấu ký...",
+      "jsonLabel": "Nội dung dữ liệu (định dạng JSON)",
+      "jsonPlaceholder": "{\n  \"hoTen\": \"Nguyễn Văn A\",\n  \"maHoSo\": \"HS-2026-001\"\n}",
+      "loadSampleJson": "Dùng mẫu có sẵn",
+      "invalidJson": "Nội dung chưa đúng định dạng JSON.",
+      "submitJson": "Ký dữ liệu"
+    },
+    "result": {
+      "pdfSuccess": "Đã ký thành công và tải tệp về máy của bạn.",
+      "jsonSuccess": "Đã ký dữ liệu thành công.",
+      "documentCode": "Mã văn bản",
+      "fileName": "Tên tệp đã tải",
+      "verifyLink": "Mở trang kiểm tra mã QR",
+      "copySignedData": "Sao chép dữ liệu đã ký",
+      "copied": "Đã sao chép",
+      "signAnother": "Ký văn bản khác"
+    }
+  },
+  "certificates": {
+    "eyebrow": "QUẢN LÝ CHỮ KÝ",
+    "title": "Chữ ký số của tôi",
+    "subtitle": "Tạo và quản lý tối đa 5 chữ ký đang hoạt động cho tài khoản của bạn.",
+    "quotaLabel": "Đang hoạt động: {active} / 5",
+    "issueButton": "Tạo chữ ký mới",
+    "limitReached": "Đã đạt giới hạn tối đa 5 chữ ký đang hoạt động.",
+    "emptyTitle": "Chưa có chữ ký nào",
+    "emptyDesc": "Tạo chữ ký đầu tiên để bắt đầu ký văn bản và dữ liệu điện tử.",
+    "statuses": {
+      "1": "Đang hoạt động",
+      "2": "Đã hết hạn",
+      "3": "Đã thu hồi"
+    },
+    "algorithms": {
+      "1": "Chuẩn RSA-2048",
+      "2": "Chuẩn ECDSA-P256"
+    },
+    "fields": {
+      "createdAt": "Ngày tạo",
+      "expiresAt": "Hết hạn",
+      "revokedAt": "Ngày thu hồi",
+      "revokedReason": "Lý do thu hồi",
+      "detailsToggle": "Thông tin kỹ thuật",
+      "serial": "Số sê-ri",
+      "publicKey": "Khóa công khai",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép"
+    },
+    "issueModal": {
+      "title": "Tạo chữ ký mới",
+      "subjectLabel": "Tên chủ sở hữu hiển thị trên chữ ký",
+      "subjectPlaceholder": "Ví dụ: Công ty Cổ phần ABC",
+      "subjectRequired": "Vui lòng nhập tên chủ sở hữu.",
+      "algorithmLabel": "Chuẩn bảo mật",
+      "validityLabel": "Thời hạn sử dụng (ngày)",
+      "validityInvalid": "Thời hạn phải từ 1 đến 3650 ngày.",
+      "submit": "Xác nhận tạo",
+      "submitting": "Đang khởi tạo...",
+      "cancel": "Hủy"
+    },
+    "revokeModal": {
+      "title": "Thu hồi chữ ký",
+      "warning": "Chữ ký sau khi thu hồi sẽ không thể dùng để ký mới nữa.",
+      "dateLabel": "Mất hiệu lực từ thời điểm (tùy chọn)",
+      "reasonLabel": "Lý do thu hồi (tùy chọn)",
+      "reasonPlaceholder": "Ví dụ: Đổi thiết bị hoặc thay đổi thông tin",
+      "submit": "Xác nhận thu hồi",
+      "submitting": "Đang thu hồi...",
+      "cancel": "Đóng"
+    }
+  },
+  "apiKeys": {
+    "eyebrow": "TÍCH HỢP HỆ THỐNG",
+    "title": "Khóa kết nối",
+    "subtitle": "Cấp khóa để phần mềm bên ngoài tự động gọi dịch vụ ký và kiểm tra văn bản.",
+    "createButton": "Tạo khóa mới",
+    "emptyTitle": "Chưa có khóa kết nối nào",
+    "emptyDesc": "Tạo khóa mới nếu bạn cần kết nối từ phần mềm kế toán, hóa đơn hoặc hệ thống nội bộ.",
+    "statusActive": "Đang bật",
+    "statusRevoked": "Đã tắt",
+    "fields": {
+      "prefix": "Mã nhận diện",
+      "scopes": "Quyền hạn",
+      "lastUsed": "Dùng gần nhất",
+      "neverUsed": "Chưa sử dụng",
+      "expiresAt": "Hết hạn",
+      "noExpiry": "Không giới hạn",
+      "revoke": "Thu hồi"
+    },
+    "createModal": {
+      "title": "Tạo khóa kết nối mới",
+      "nameLabel": "Tên gợi nhớ",
+      "namePlaceholder": "Ví dụ: Hệ thống hóa đơn",
+      "nameRequired": "Vui lòng nhập tên gợi nhớ.",
+      "scopesLabel": "Phạm vi quyền",
+      "scopeSign": "Ký văn bản (sign)",
+      "scopeVerify": "Kiểm tra văn bản (verify)",
+      "scopeRequired": "Vui lòng chọn ít nhất một quyền.",
+      "expiresLabel": "Ngày hết hạn (tùy chọn)",
+      "submit": "Tạo khóa",
+      "submitting": "Đang tạo...",
+      "cancel": "Hủy"
+    },
+    "oneTimeModal": {
+      "title": "Lưu khóa kết nối của bạn ngay",
+      "warning": "Chuỗi khóa này chỉ hiển thị duy nhất một lần. Sau khi đóng cửa sổ này, bạn sẽ không thể xem lại.",
+      "copy": "Sao chép khóa",
+      "copied": "Đã sao chép",
+      "done": "Tôi đã lưu, đóng lại"
+    },
+    "revokeModal": {
+      "title": "Thu hồi khóa kết nối",
+      "description": "Các phần mềm đang dùng khóa này sẽ lập tức mất quyền truy cập.",
+      "confirm": "Thu hồi ngay",
+      "submitting": "Đang xử lý...",
+      "cancel": "Hủy"
+    }
+  },
+  "documents": {
+    "eyebrow": "HỒ SƠ LƯU TRỮ",
+    "title": "Văn bản đã ký",
+    "subtitle": "Danh sách toàn bộ văn bản đã đóng dấu xác nhận và số liệu kiểm tra thực tế.",
+    "emptyTitle": "Chưa có hồ sơ nào",
+    "emptyDesc": "Các văn bản bạn ký sẽ tự động xuất hiện tại đây.",
+    "types": {
+      "1": "PDF",
+      "2": "JSON"
+    },
+    "columns": {
+      "document": "Văn bản",
+      "type": "Loại",
+      "verifications": "Lượt kiểm tra",
+      "alerts": "Cảnh báo",
+      "createdAt": "Ngày ký",
+      "actions": "Chi tiết"
+    },
+    "viewHistory": "Lịch sử kiểm tra",
+    "prevPage": "Trang trước",
+    "nextPage": "Trang sau",
+    "history": {
+      "back": "Quay lại danh sách",
+      "title": "Nhật ký kiểm tra văn bản",
+      "subtitle": "Theo dõi từng lượt kiểm tra từ người nhận hoặc hệ thống đối tác.",
+      "emptyTitle": "Chưa có lượt kiểm tra nào",
+      "emptyDesc": "Văn bản này chưa được mang đi kiểm tra lần nào.",
+      "methods": {
+        "1": "Tải tệp trên Web",
+        "2": "Quét mã QR",
+        "3": "Qua khóa kết nối"
+      },
+      "statuses": {
+        "1": "Nguyên vẹn",
+        "2": "Bị chỉnh sửa",
+        "3": "Chữ ký đã thu hồi",
+        "4": "Chữ ký hết hạn",
+        "5": "Không rõ chữ ký",
+        "6": "Tra cứu mã QR"
+      },
+      "fields": {
+        "time": "Thời điểm",
+        "method": "Hình thức",
+        "status": "Kết quả",
+        "ip": "Địa chỉ IP"
+      }
+    }
+  }
+}

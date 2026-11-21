@@ -1,0 +1,220 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "sign": "Sign Document",
+    "certificates": "My Signatures",
+    "apiKeys": "API Keys",
+    "documents": "Signed Records",
+    "verifyPublic": "Public Check"
+  },
+  "overview": {
+    "eyebrow": "WORKSPACE",
+    "title": "Activity overview",
+    "subtitle": "Monitor your signing volume, verification activity, and document integrity alerts.",
+    "kpis": {
+      "totalSigned": "Signed documents",
+      "totalVerifications": "Total checks",
+      "uniqueVerifications": "Unique checks",
+      "tamperedAlerts": "Tamper alerts"
+    },
+    "quota": {
+      "title": "Active signature quota",
+      "countLabel": "{active} / 5 active",
+      "activeKeys": "{count} active API keys",
+      "manageCerts": "Manage signatures",
+      "signNow": "Sign a document"
+    },
+    "recent": {
+      "title": "Recently signed",
+      "viewAll": "View all",
+      "emptyTitle": "No signed documents yet",
+      "emptyDesc": "Upload a PDF or digital record to apply your first signature."
+    }
+  },
+  "sign": {
+    "eyebrow": "SIGNING STUDIO",
+    "title": "Sign a document",
+    "subtitle": "Choose an active signature and provide the file or data you want to seal.",
+    "tabs": {
+      "pdf": "PDF Document",
+      "json": "Digital Record"
+    },
+    "noCertTitle": "No active signature available",
+    "noCertDesc": "Please create at least one signature before signing documents.",
+    "goToCerts": "Create a signature",
+    "form": {
+      "certLabel": "Signature to use",
+      "autoSelect": "Automatically use newest active signature",
+      "reasonLabel": "Reason (optional)",
+      "reasonPlaceholder": "Example: Contract approval",
+      "locationLabel": "Location (optional)",
+      "locationPlaceholder": "Example: Hanoi, Vietnam",
+      "pdfDropTitle": "Choose or drop a PDF file to sign",
+      "pdfDropHint": "Up to 20 MB",
+      "submitPdf": "Sign and download PDF",
+      "submitting": "Signing document...",
+      "jsonLabel": "Record content (JSON format)",
+      "jsonPlaceholder": "{\n  \"fullName\": \"John Doe\",\n  \"recordId\": \"REC-2026-001\"\n}",
+      "loadSampleJson": "Load sample",
+      "invalidJson": "The content is not valid JSON.",
+      "submitJson": "Sign record"
+    },
+    "result": {
+      "pdfSuccess": "Document signed and downloaded to your device.",
+      "jsonSuccess": "Record signed successfully.",
+      "documentCode": "Document code",
+      "fileName": "Downloaded file",
+      "verifyLink": "Open QR check page",
+      "copySignedData": "Copy signed output",
+      "copied": "Copied",
+      "signAnother": "Sign another document"
+    }
+  },
+  "certificates": {
+    "eyebrow": "SIGNATURE CUSTODY",
+    "title": "My digital signatures",
+    "subtitle": "Create and manage up to 5 active signatures for your account.",
+    "quotaLabel": "Active: {active} / 5",
+    "issueButton": "New signature",
+    "limitReached": "You have reached the limit of 5 active signatures.",
+    "emptyTitle": "No signatures yet",
+    "emptyDesc": "Create your first signature to start signing documents and records.",
+    "statuses": {
+      "1": "Active",
+      "2": "Expired",
+      "3": "Revoked"
+    },
+    "algorithms": {
+      "1": "RSA-2048",
+      "2": "ECDSA-P256"
+    },
+    "fields": {
+      "createdAt": "Created",
+      "expiresAt": "Expires",
+      "revokedAt": "Revoked on",
+      "revokedReason": "Reason",
+      "detailsToggle": "Technical details",
+      "serial": "Serial number",
+      "publicKey": "Public key",
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "issueModal": {
+      "title": "Create a new signature",
+      "subjectLabel": "Display name on signature",
+      "subjectPlaceholder": "Example: Acme Corporation",
+      "subjectRequired": "Please enter a display name.",
+      "algorithmLabel": "Security standard",
+      "validityLabel": "Validity period (days)",
+      "validityInvalid": "Validity must be between 1 and 3650 days.",
+      "submit": "Create signature",
+      "submitting": "Creating...",
+      "cancel": "Cancel"
+    },
+    "revokeModal": {
+      "title": "Revoke signature",
+      "warning": "Once revoked, this signature can no longer be used for new documents.",
+      "dateLabel": "Effective from (optional)",
+      "reasonLabel": "Reason (optional)",
+      "reasonPlaceholder": "Example: Device replacement or key rotation",
+      "submit": "Confirm revocation",
+      "submitting": "Revoking...",
+      "cancel": "Close"
+    }
+  },
+  "apiKeys": {
+    "eyebrow": "INTEGRATIONS",
+    "title": "API Keys",
+    "subtitle": "Issue keys for external apps to sign and verify documents automatically.",
+    "createButton": "Create API key",
+    "emptyTitle": "No API keys yet",
+    "emptyDesc": "Create a key when you want to connect invoicing or internal software.",
+    "statusActive": "Active",
+    "statusRevoked": "Revoked",
+    "fields": {
+      "prefix": "Key prefix",
+      "scopes": "Permissions",
+      "lastUsed": "Last used",
+      "neverUsed": "Never used",
+      "expiresAt": "Expires",
+      "noExpiry": "No expiry",
+      "revoke": "Revoke"
+    },
+    "createModal": {
+      "title": "Create a new API key",
+      "nameLabel": "Friendly name",
+      "namePlaceholder": "Example: Invoicing backend",
+      "nameRequired": "Please enter a name.",
+      "scopesLabel": "Allowed actions",
+      "scopeSign": "Sign documents (sign)",
+      "scopeVerify": "Verify documents (verify)",
+      "scopeRequired": "Please choose at least one permission.",
+      "expiresLabel": "Expiration date (optional)",
+      "submit": "Create key",
+      "submitting": "Creating...",
+      "cancel": "Cancel"
+    },
+    "oneTimeModal": {
+      "title": "Save your API key now",
+      "warning": "This key is shown only once. You will not be able to view it again after closing this window.",
+      "copy": "Copy key",
+      "copied": "Copied",
+      "done": "I have saved it, close"
+    },
+    "revokeModal": {
+      "title": "Revoke API key",
+      "description": "Applications using this key will immediately lose access.",
+      "confirm": "Revoke key",
+      "submitting": "Revoking...",
+      "cancel": "Cancel"
+    }
+  },
+  "documents": {
+    "eyebrow": "ARCHIVE",
+    "title": "Signed documents",
+    "subtitle": "All documents you have signed along with their verification counts.",
+    "emptyTitle": "No signed documents yet",
+    "emptyDesc": "Documents you sign will appear here automatically.",
+    "types": {
+      "1": "PDF",
+      "2": "JSON"
+    },
+    "columns": {
+      "document": "Document",
+      "type": "Format",
+      "verifications": "Checks",
+      "alerts": "Alerts",
+      "createdAt": "Signed on",
+      "actions": "Details"
+    },
+    "viewHistory": "Check history",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "history": {
+      "back": "Back to list",
+      "title": "Verification history",
+      "subtitle": "Every check performed by recipients or partner systems.",
+      "emptyTitle": "No checks recorded yet",
+      "emptyDesc": "This document has not been verified yet.",
+      "methods": {
+        "1": "Web upload",
+        "2": "QR code scan",
+        "3": "API key"
+      },
+      "statuses": {
+        "1": "Intact",
+        "2": "Modified",
+        "3": "Revoked",
+        "4": "Expired",
+        "5": "Unknown",
+        "6": "QR lookup"
+      },
+      "fields": {
+        "time": "Checked at",
+        "method": "Method",
+        "status": "Outcome",
+        "ip": "IP address"
+      }
+    }
+  }
+}
