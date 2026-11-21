@@ -37,7 +37,8 @@ public sealed class VerificationLogConfiguration : IEntityTypeConfiguration<Veri
             .HasColumnName("verification_method")
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<VerificationMethodType>(v, true))
+                // Strip underscores so SCREAMING_SNAKE_CASE values written by Go (e.g. WEB_UPLOAD) parse cleanly
+                v => Enum.Parse<VerificationMethodType>(v.Replace("_", string.Empty), true))
             .HasMaxLength(20)
             .IsRequired();
 
@@ -63,7 +64,8 @@ public sealed class VerificationLogConfiguration : IEntityTypeConfiguration<Veri
             .HasColumnName("validation_status")
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<ValidationStatusType>(v, true))
+                // Strip underscores so SCREAMING_SNAKE_CASE values written by Go (e.g. CODE_EXISTS_UNVERIFIED_CONTENT) parse cleanly
+                v => Enum.Parse<ValidationStatusType>(v.Replace("_", string.Empty), true))
             .HasMaxLength(50)
             .IsRequired();
 
