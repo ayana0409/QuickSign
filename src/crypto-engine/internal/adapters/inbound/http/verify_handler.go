@@ -68,18 +68,18 @@ func (h *VerifyHandler) HandleVerifyFile(w http.ResponseWriter, r *http.Request)
 	contentType := r.Header.Get("Content-Type")
 	if strings.HasPrefix(contentType, "multipart/form-data") {
 		if err := r.ParseMultipartForm(25 << 20); err != nil {
-			WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Failed to parse multipart verification payload.", nil)
+			WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Failed to parse multipart verification payload.", nil)
 			return
 		}
 		file, header, err := r.FormFile("file")
 		if err != nil {
-			WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Multipart field 'file' is required.", nil)
+			WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Multipart field 'file' is required.", nil)
 			return
 		}
 		defer file.Close()
 		bytes, readErr := io.ReadAll(file)
 		if readErr != nil {
-			WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Unable to read uploaded file.", nil)
+			WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Unable to read uploaded file.", nil)
 			return
 		}
 		fileBytes = bytes
@@ -88,7 +88,7 @@ func (h *VerifyHandler) HandleVerifyFile(w http.ResponseWriter, r *http.Request)
 		// Read raw body (e.g. text/plain or application/json containing JWS)
 		bodyBytes, err := io.ReadAll(r.Body)
 		if err != nil || len(bodyBytes) == 0 {
-			WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Verification payload cannot be empty.", nil)
+			WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Verification payload cannot be empty.", nil)
 			return
 		}
 
@@ -114,7 +114,7 @@ func (h *VerifyHandler) HandleVerifyFile(w http.ResponseWriter, r *http.Request)
 
 	result, err := h.verifyUseCase.VerifyFile(r.Context(), input)
 	if err != nil {
-		WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", err.Error(), nil)
+		WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", err.Error(), nil)
 		return
 	}
 
@@ -140,7 +140,7 @@ func (h *VerifyHandler) HandleVerifyFile(w http.ResponseWriter, r *http.Request)
 func (h *VerifyHandler) HandleVerifyByCode(w http.ResponseWriter, r *http.Request) {
 	documentCode := r.PathValue("documentCode")
 	if strings.TrimSpace(documentCode) == "" {
-		WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Document code path parameter is required.", nil)
+		WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Document code path parameter is required.", nil)
 		return
 	}
 
@@ -153,7 +153,7 @@ func (h *VerifyHandler) HandleVerifyByCode(w http.ResponseWriter, r *http.Reques
 			WriteError(w, http.StatusNotFound, "DOCUMENT_NOT_FOUND", "Document not found for the supplied code.", nil)
 			return
 		}
-		WriteError(w, http.StatusInternalServerError, "INTERNAL_ERROR", err.Error(), nil)
+		WriteError(w, http.StatusInternalServerError, "INTERNAL_SERVER_ERROR", err.Error(), nil)
 		return
 	}
 

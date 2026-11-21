@@ -100,10 +100,12 @@ func (m *MockDocumentRepository) GetApiKeyBySecretHash(ctx context.Context, secr
 type MockPdfCryptoPort struct {
 	SignedBytesToReturn []byte
 	HashToReturn        string
+	LastQrUrl           string
 	ShouldFail          bool
 }
 
 func (m *MockPdfCryptoPort) SignPdfPades(pdfBytes []byte, privKey any, certDER []byte, docCode string, qrUrl string, reason, location string) ([]byte, string, error) {
+	m.LastQrUrl = qrUrl
 	if m.ShouldFail {
 		return nil, "", domain.ErrSigningFailed
 	}
@@ -188,7 +190,7 @@ func TestSigningService_SignPdf_Success(t *testing.T) {
 		ExpiresAt:    time.Now().Add(24 * time.Hour),
 	}
 
-	svc, err := services.NewSigningService(mockVault, mockRepo, mockPdf, mockJws, "http://localhost:50052")
+	svc, err := services.NewSigningService(mockVault, mockRepo, mockPdf, mockJws, "http://localhost:3000")
 	require.NoError(t, err)
 
 	input := domain.SignPdfInput{

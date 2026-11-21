@@ -147,18 +147,18 @@ func (h *SignHandler) HandleSignJson(w http.ResponseWriter, r *http.Request) {
 
 	var req signJsonRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Invalid JSON request body.", nil)
+		WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Invalid JSON request body.", nil)
 		return
 	}
 
 	if len(req.Payload) == 0 {
-		WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Payload object cannot be empty.", nil)
+		WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Payload object cannot be empty.", nil)
 		return
 	}
 
 	payloadBytes, err := json.Marshal(req.Payload)
 	if err != nil {
-		WriteError(w, http.StatusBadRequest, "INVALID_ARGUMENT", "Failed to serialize payload.", nil)
+		WriteError(w, http.StatusBadRequest, "INVALID_PAYLOAD", "Failed to serialize payload.", nil)
 		return
 	}
 

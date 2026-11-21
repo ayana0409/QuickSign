@@ -22,7 +22,7 @@ type Config struct {
 	RedisAddr       string
 	RedisPassword   string
 	SSOAuthority    string
-	AppBaseURL      string
+	WebPortalURL    string
 }
 
 // LoadConfig reads configuration from .env (if present) and environment variables.
@@ -53,7 +53,7 @@ func LoadConfig() (*Config, error) {
 		RedisAddr:       getEnv("REDIS_ADDR", "127.0.0.1:6379"),
 		RedisPassword:   getEnv("REDIS_PASSWORD", ""),
 		SSOAuthority:    getEnv("SSO_AUTHORITY", ""),
-		AppBaseURL:      getEnv("APP_BASE_URL", "http://localhost:50052"),
+		WebPortalURL:    getEnv("WEB_PORTAL_URL", "http://localhost:3000"),
 	}
 
 	return cfg, nil

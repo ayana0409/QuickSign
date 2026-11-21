@@ -24,9 +24,9 @@ import (
 type SigningService struct {
 	vaultPort  ports.VaultKeyStorePort
 	repoPort   ports.DocumentRepositoryPort
-	pdfPort    ports.PdfCryptoPort
-	jwsPort    ports.JwsCryptoPort
-	appBaseURL string
+	pdfPort      ports.PdfCryptoPort
+	jwsPort      ports.JwsCryptoPort
+	webPortalURL string
 }
 
 // NewSigningService constructs a new SigningService instance.
@@ -35,7 +35,7 @@ func NewSigningService(
 	repoPort ports.DocumentRepositoryPort,
 	pdfPort ports.PdfCryptoPort,
 	jwsPort ports.JwsCryptoPort,
-	appBaseURL string,
+	webPortalURL string,
 ) (*SigningService, error) {
 	if vaultPort == nil {
 		return nil, errors.New("vaultPort cannot be nil")
@@ -53,9 +53,9 @@ func NewSigningService(
 	return &SigningService{
 		vaultPort:  vaultPort,
 		repoPort:   repoPort,
-		pdfPort:    pdfPort,
-		jwsPort:    jwsPort,
-		appBaseURL: strings.TrimRight(appBaseURL, "/"),
+		pdfPort:      pdfPort,
+		jwsPort:      jwsPort,
+		webPortalURL: strings.TrimRight(webPortalURL, "/"),
 	}, nil
 }
 
@@ -105,7 +105,7 @@ func (s *SigningService) SignPdf(ctx context.Context, input domain.SignPdfInput)
 
 	// 3. Generate unique document_code: DOC-YYYY-XXXXXXXX
 	docCode := generateDocumentCode()
-	qrUrl := fmt.Sprintf("%s/api/v1/verify/code/%s", s.appBaseURL, docCode)
+	qrUrl := fmt.Sprintf("%s/verify/%s", s.webPortalURL, docCode)
 
 	// 4. Perform PAdES signing and QR code embedding
 	signedBytes, signedHash, err := s.pdfPort.SignPdfPades(

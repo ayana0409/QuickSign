@@ -186,7 +186,7 @@ func setupTestHttpServer(t *testing.T) (http.Handler, *inMemoryIntegrationRepo, 
 	padesAdapter := pdf_pades.NewPadesPdfAdapter()
 	jwsAdapter := jws_crypto.NewJwsAdapter()
 
-	signingSvc, err := services.NewSigningService(vaultStore, repo, padesAdapter, jwsAdapter, "http://localhost:50052")
+	signingSvc, err := services.NewSigningService(vaultStore, repo, padesAdapter, jwsAdapter, "http://localhost:3000")
 	require.NoError(t, err)
 
 	verifySvc, err := services.NewVerificationService(repo, nil, padesAdapter, jwsAdapter)

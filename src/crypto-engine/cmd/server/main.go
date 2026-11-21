@@ -136,7 +136,7 @@ func main() {
 	// 7. Setup HTTP REST Server (Port :50052)
 	var httpServer *http.Server
 	if pgRepo != nil {
-		signingService, err := services.NewSigningService(vaultStore, pgRepo, padesAdapter, jwsAdapter, cfg.AppBaseURL)
+		signingService, err := services.NewSigningService(vaultStore, pgRepo, padesAdapter, jwsAdapter, cfg.WebPortalURL)
 		if err != nil {
 			log.Fatalf("[FATAL] Failed to initialize SigningService: %v", err)
 		}
